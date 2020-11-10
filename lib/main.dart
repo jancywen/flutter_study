@@ -1,4 +1,7 @@
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'index.dart';
 
 void main() {
@@ -12,6 +15,8 @@ class MyApp extends StatelessWidget {
     "/home_index": (context) => MyHomePage(title: 'Flutter Demo Home Page'),
     "/error_page": (context) => ErrorPage(),
     "/geek_home": (context) => HomePage(),
+    "/product_detail": (context) => ProductDetail(),
+    
   };
 
   Route<dynamic> _onGenerateRoute(RouteSettings settings) {
@@ -31,17 +36,19 @@ class MyApp extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      routes: _routeList,
-      initialRoute: "/home_index",
-      onGenerateRoute: _onGenerateRoute,
-      onUnknownRoute: _onUnknownRoute,
-    );
+
+    return MultiProvider(
+      providers: providers,
+      child: MaterialApp(
+        title:"flutter demo",
+        theme: ThemeData(
+          primarySwatch: Colors.blue, 
+          visualDensity: VisualDensity.adaptivePlatformDensity),
+        routes: _routeList,
+        initialRoute: "/home_index",
+        onGenerateRoute: _onGenerateRoute,
+        onUnknownRoute: _onUnknownRoute,
+      ));
   }
 }
 
@@ -74,6 +81,8 @@ class _MyHomePageState extends State<MyHomePage> {
         return HomePage();
       case 1:
         return SortPage();
+      case 2:
+        return ExamplePage1();
       default:
         return ErrorPage();
     }

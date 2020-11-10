@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flukit/flukit.dart';
 
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -159,7 +160,9 @@ class _HomePageState extends State<HomePage>
           SliverPadding(padding: const EdgeInsets.fromLTRB(15, 0, 15, 5), 
             sliver: SliverGrid(delegate: new SliverChildBuilderDelegate(
               (BuildContext context, int index){
-                return ClipRRect(
+                return GestureDetector(
+                  child:
+                ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
                     decoration: new BoxDecoration(
@@ -202,6 +205,10 @@ class _HomePageState extends State<HomePage>
                     ],
                   ),
                   )
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, "/product_detail");
+                },
                 );
 
               }, childCount: 3,
