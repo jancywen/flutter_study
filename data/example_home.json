@@ -1,0 +1,20 @@
+{
+    "banners": [
+        {
+            "imgUrl": "imgs/688.jpg",
+            "linkUrl": ""
+        }
+    ],
+    "brands": [
+        {
+            "name": "name",
+            "icon": "imgs/688.jpg"
+        }
+    ],
+    "products": [
+        {
+            "name": "name",
+            "icon": "imgs/688.jpg"
+        }
+    ]
+}

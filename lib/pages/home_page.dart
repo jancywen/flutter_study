@@ -1,5 +1,8 @@
+
 import 'package:flutter/material.dart';
-import 'package:flukit/flukit.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -11,6 +14,8 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
 
+  RefreshController _refreshController = RefreshController(initialRefresh: false);
+
   @override
   void initState() {
     super.initState();
@@ -21,48 +26,66 @@ class _HomePageState extends State<HomePage>
   void dispose() {
     super.dispose();
     _controller.dispose();
+    _refreshController.dispose();
+  }
+
+  void _onRefresh() async {
+    await Future.delayed(Duration(seconds: 2));
+    _refreshController.refreshCompleted();
+  }
+
+  void _onLoading() async {
+    await Future.delayed(Duration(seconds: 2));
+    _refreshController.loadComplete();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: Text("Geek Home"),),
-      body: CustomScrollView(
+      appBar: _buildAppbar(),
+      body:
+      SmartRefresher(
+        enablePullDown: true,
+        enablePullUp: true,
+        header: ClassicHeader(),
+        footer: ClassicFooter(),
+        controller: _refreshController,
+        onRefresh: _onRefresh,
+        onLoading: _onLoading,
+        child: 
+       CustomScrollView(
         slivers: <Widget>[
-          SliverPadding(
-            padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-            sliver: SliverList(delegate: new SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: Container(
-                  height: 35,
-                  color: Color(0x08000000),
-                  child: Center(
-                    child:Text("限量发售 | 数字魔法礼盒", style: TextStyle(color: Colors.orange)),
-                  ),
-                )
-                );
-              }, childCount: 1
-            )
-            ),
-          ),
+          // SliverToBoxAdapter(
+          //   child: Container(height: ScreenUtil().statusBarHeight,),
+          // ),
+          // SliverPadding(
+          //   padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
+          //   sliver: SliverList(delegate: new SliverChildBuilderDelegate(
+          //     (BuildContext context, int index) {
+          //       return ClipRRect(
+          //         borderRadius: BorderRadius.circular(5),
+          //         child: Container(
+          //         height: 35,
+          //         color: Color(0x08000000),
+          //         child: Center(
+          //           child:Text("限量发售 | 数字魔法礼盒", style: TextStyle(color: Colors.orange)),
+          //         ),
+          //       )
+          //       );
+          //     }, childCount: 1
+          //   )
+          //   ),
+          // ),
 
           SliverList(delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
               return AspectRatio(
-                aspectRatio: 1,
+                aspectRatio: 1.5,
                 child: Swiper(
-                  indicatorAlignment: AlignmentDirectional.bottomCenter,
-                  speed: 400,
-                  circular: true,
-                  indicator: CircleSwiperIndicator(),
-                  children: <Widget>[
-                    Image.asset("imgs/688.jpg", fit: BoxFit.cover),
-                    Image.asset("imgs/688.jpg", fit: BoxFit.cover),
-                    Image.asset("imgs/688.jpg", fit: BoxFit.cover),
-                  ],
-                ),
+                  itemBuilder: (BuildContext context, int index){
+                    return Image.asset("imgs/688.jpg",fit: BoxFit.cover);
+                  }, 
+                  itemCount: 3,),
               );
             }, childCount: 1,
           )
@@ -207,7 +230,7 @@ class _HomePageState extends State<HomePage>
                   )
                 ),
                 onTap: () {
-                  Navigator.pushNamed(context, "/product_detail");
+                  Navigator.pushNamed(context, "/product_detail", arguments: "somearguments");
                 },
                 );
 
@@ -329,6 +352,43 @@ class _HomePageState extends State<HomePage>
 
         ],
       ),
+      )
     );
   }
+
+
+
+  AppBar _buildAppbar() {
+    return AppBar(
+      backgroundColor: Colors.green,
+      elevation: 0,
+      title: Container(
+        height: ScreenUtil().setHeight(70),
+        child: TextField(
+          textAlignVertical: TextAlignVertical.center,
+          textAlign: TextAlign.center,
+          decoration: InputDecoration(
+            hintText: '限量发售 | 数字魔法礼盒',
+            border: InputBorder.none,
+            alignLabelWithHint: true,
+            filled: true,
+            fillColor: Colors.white,
+            // suffixIcon: Icon(
+            //   Icons.search,
+            //   color: Colors.grey,
+            // ),
+            hintStyle: TextStyle(
+              height: 1,
+              color: Colors.orange,
+              fontSize: 16
+            ),
+          ),
+          style: TextStyle(height: 1, color: Colors.black),
+        ),
+      ),
+      
+    );
+  }
+
+
 }

@@ -1,11 +1,9 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_study/provider/index.dart';
 import 'package:flutter_study/models/index.dart';
-
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class ExamplePage extends StatelessWidget {
 
@@ -39,7 +37,6 @@ class ExamplePage extends StatelessWidget {
     );
   }
 }
-
 
 
 class ExamplePage1 extends StatelessWidget {
@@ -92,8 +89,49 @@ class ExamplePage1 extends StatelessWidget {
                 );
               }),
 
+            FlatButton(onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context){
+                return ExamplePage2("some");
+              }));
+            }, child: Text("push to"))
+
           ]
         ),
       );
   }
 }
+
+
+class ExamplePage2 extends StatelessWidget {
+  final String someParam;
+  ExamplePage2(this.someParam);
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_)=> ExampleProvider2(someParam),
+      child: Scaffold(
+        appBar: AppBar(title: Text("single provider page")),
+        body: Consumer<ExampleProvider2>(builder: (_, sp, __){
+          return SmartRefresher(
+            controller: sp.refreshController,
+            enablePullDown: true,
+            enablePullUp: true,
+            onRefresh: sp.onRefresh,
+            onLoading: sp.onLoading,
+            child: 
+              ListView.builder(itemBuilder: (c, i){
+                return ListTile(title: Text("${sp.list[i]} -- $i"));
+                }, 
+                itemCount: sp.list.length, 
+                itemExtent: 50,
+                ),
+            );
+        },)
+      ),
+    );
+  }
+}
+
+
+

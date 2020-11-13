@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class SortPage extends StatefulWidget {
   @override
@@ -32,6 +34,7 @@ class _SortPageState extends State<SortPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _buildAppbar(),
       body: 
       // Column(
       //   children: <Widget> [
@@ -111,4 +114,37 @@ class _SortPageState extends State<SortPage>
       // )
     );
   }
+
+
+  AppBar _buildAppbar() {
+    return AppBar(
+      backgroundColor: Colors.green,
+      elevation: 0,
+      title: Container(
+        height: ScreenUtil().setHeight(70),
+        child: TextField(
+          textAlignVertical: TextAlignVertical.center,
+          textAlign: TextAlign.left,
+          decoration: InputDecoration(
+            hintText: '搜索关键词',
+            border: InputBorder.none,
+            alignLabelWithHint: true,
+            filled: true,
+            fillColor: Colors.white,
+            suffixIcon: Icon(
+              Icons.search,
+              color: Colors.grey,
+            ),
+            hintStyle: TextStyle(
+              height: 1,
+            ),
+          ),
+          style: TextStyle(height: 1, color: Colors.black),
+        ),
+      ),
+      
+    );
+  }
+
+
 }

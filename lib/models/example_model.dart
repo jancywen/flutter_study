@@ -84,3 +84,75 @@ class ExampleSimpleModel {
   };
 
 }
+
+class ExampleHomeModel {
+  List<ExampleBannerModel> banners;
+  List<ExampleBrandModel> brands;
+  List<ExampleProductModel> products;
+
+  ExampleHomeModel({this.banners, this.brands, this.products});
+
+  factory ExampleHomeModel.fromJson(Map<String, dynamic> json) => ExampleHomeModel(
+    banners: List<ExampleBannerModel>.from(json["banners"].map((x)=> ExampleBannerModel.fromJson(x))),
+    brands: List<ExampleBrandModel>.from(json["brands"].map((x) => ExampleBrandModel.fromJson(x))),
+    products: List<ExampleProductModel>.from(json["products"].map((x) => ExampleProductModel.fromJson(x)))
+    );
+
+}
+
+/// banner
+class ExampleBannerModel {
+  String imgUrl;
+  String linkUrl;
+
+  ExampleBannerModel({this.imgUrl, this.linkUrl});
+
+  factory ExampleBannerModel.fromJson(Map<String, dynamic> json) => ExampleBannerModel(
+    imgUrl: json["imgUrl"], 
+    linkUrl: json["linkUrl"]
+    );
+  
+  Map<String, dynamic> toJson() => {
+    "imgUrl": imgUrl,
+    "linkUrl": linkUrl,
+  };
+
+}
+
+/// 品牌
+class ExampleBrandModel {
+  String name;
+  String icon;
+
+  ExampleBrandModel({this.name, this.icon});
+
+  factory ExampleBrandModel.fromJson(Map<String, dynamic> json) => ExampleBrandModel(
+    name: json["name"], 
+    icon: json["icon"]
+    );
+  
+  Map<String, dynamic> toJson() => {
+    "name": name,
+    "icon": icon,
+  };
+
+}
+
+/// 商品
+class ExampleProductModel {
+  String name;
+  String icon;
+
+  ExampleProductModel({this.name, this.icon});
+
+  factory ExampleProductModel.fromJson(Map<String, dynamic> json) => ExampleProductModel(
+    name: json["name"], 
+    icon: json["icon"]
+    );
+  
+  Map<String, dynamic> toJson() => {
+    "name": name,
+    "icon": icon,
+  };
+
+}

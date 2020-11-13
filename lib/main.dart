@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'index.dart';
 
 void main() {
@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
     "/error_page": (context) => ErrorPage(),
     "/geek_home": (context) => HomePage(),
     "/product_detail": (context) => ProductDetail(),
-    
   };
 
   Route<dynamic> _onGenerateRoute(RouteSettings settings) {
@@ -42,6 +41,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title:"flutter demo",
         theme: ThemeData(
+          // brightness: Brightness.dark,
           primarySwatch: Colors.blue, 
           visualDensity: VisualDensity.adaptivePlatformDensity),
         routes: _routeList,
@@ -90,6 +90,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    // 屏幕适配
+    ScreenUtil.init(context, designSize: Size(750, 1334), allowFontScaling: false);
+
     return Scaffold(
       // appBar: AppBar(
       //   title: Text(widget.title),

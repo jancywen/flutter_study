@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flukit/flukit.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 class ProductDetail extends StatefulWidget {
   @override
@@ -24,6 +24,11 @@ class _ProductDetailState extends State<ProductDetail>
 
   @override
   Widget build(BuildContext context) {
+
+  //取出路由参数 
+  String msg = ModalRoute.of(context).settings.arguments as String;
+  print(msg);
+
     return Scaffold(
       body:CustomScrollView(
         slivers: [
@@ -60,16 +65,10 @@ class _ProductDetailState extends State<ProductDetail>
             flexibleSpace: FlexibleSpaceBar(
               // title: Text("商品详情"),
               background: Swiper(
-                indicatorAlignment: AlignmentDirectional.bottomCenter,
-                speed: 400,
-                circular: true,
-                indicator: CircleSwiperIndicator(),
-                children: <Widget>[
-                  Image.asset("imgs/688.jpg", fit: BoxFit.cover),
-                  Image.asset("imgs/688.jpg", fit: BoxFit.cover),
-                  Image.asset("imgs/688.jpg", fit: BoxFit.cover),
-                ],
-              )
+                  itemBuilder: (BuildContext context, int index){
+                    return Image.asset("imgs/688.jpg",fit: BoxFit.cover);
+                  }, 
+                  itemCount: 3,),
           ),
         ),
 
