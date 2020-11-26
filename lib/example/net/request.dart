@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_study/net/api.dart';
-import 'package:flutter_study/net/result.dart';
+import 'package:flutter_study/example/net/api.dart';
+import 'package:flutter_study/example/net/result.dart';
 
 import 'system_toast.dart';
 import 'result_obj.dart';

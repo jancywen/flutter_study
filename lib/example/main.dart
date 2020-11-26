@@ -1,8 +1,10 @@
 
+
 import 'package:flutter/material.dart';
+import 'package:flutter_study/finance/pages/finance_home_page.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'index.dart';
+import 'example/../index.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,6 +15,9 @@ class MyApp extends StatelessWidget {
 
   final _routeList = {
     "/home_index": (context) => MyHomePage(title: 'Flutter Demo Home Page'),
+
+    "/finance_home": (context) => FinanceHomePage(),
+
     "/error_page": (context) => ErrorPage(),
     "/geek_home": (context) => HomePage(),
     "/product_detail": (context) => ProductDetail(),
@@ -43,9 +48,11 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           // brightness: Brightness.dark,
           primarySwatch: Colors.blue, 
-          visualDensity: VisualDensity.adaptivePlatformDensity),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          // primaryColor:  Color.fromARGB(255, 27, 29, 36),
+          ),
         routes: _routeList,
-        initialRoute: "/home_index",
+        initialRoute: "/finance_home",
         onGenerateRoute: _onGenerateRoute,
         onUnknownRoute: _onUnknownRoute,
       ));

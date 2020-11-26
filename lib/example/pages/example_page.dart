@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_study/provider/index.dart';
-import 'package:flutter_study/models/index.dart';
+import 'package:flutter_study/example/provider/index.dart';
+import 'package:flutter_study/example/models/index.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class ExamplePage extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'api.dart';
 import 'request.dart';
-import 'package:flutter_study/models/index.dart';
+import 'package:flutter_study/example/models/index.dart';
 import 'dart:convert';
 
 Future<ExampleSubModel> subExampleQuery(data) {

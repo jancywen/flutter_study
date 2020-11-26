@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_study/index.dart';
-import 'package:flutter_study/models/example_model.dart';
-import 'package:flutter_study/net/example_request_service.dart';
-import 'package:flutter_study/net/request_service.dart';
+import 'package:flutter_study/example/index.dart';
+import 'package:flutter_study/example/models/example_model.dart';
+import 'package:flutter_study/example/net/example_request_service.dart';
+import 'package:flutter_study/example/net/request_service.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class ExampleProvider with ChangeNotifier {
