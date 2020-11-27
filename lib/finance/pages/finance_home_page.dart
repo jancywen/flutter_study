@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'index.dart';
 
 class FinanceHomePage extends StatefulWidget {
@@ -71,6 +72,9 @@ class _FinanceHomePageState extends State<FinanceHomePage> {
   }
   @override
   Widget build(BuildContext context) {
+        // 屏幕适配
+    ScreenUtil.init(context, designSize: Size(750, 1334), allowFontScaling: false);
+
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         items: itemList,
