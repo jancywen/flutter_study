@@ -39,9 +39,14 @@ class MyApp extends StatelessWidget {
         title:"flutter demo",
         theme: ThemeData(
           // brightness: Brightness.dark,
+          
           primarySwatch: Colors.blue, 
           visualDensity: VisualDensity.adaptivePlatformDensity,
           // primaryColor:  Color.fromARGB(255, 27, 29, 36),
+          textTheme: TextTheme(
+            headline1: TextStyle(color: Colors.white, fontSize: 16), 
+            headline2: TextStyle(color: Colors.white30, fontSize: 12),
+            ),
           ),
         routes: _routeList,
         initialRoute: "/finance_home",

@@ -19,7 +19,7 @@ class Result {
   factory Result.fromJson(Map<String, dynamic> json) => Result(
     code: json["code"], 
     msg: json["msg"], 
-    // data: json["data"]
+    data: json["data"]
     );
 
   Map<String, dynamic> toJson() => {

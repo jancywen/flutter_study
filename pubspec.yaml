@@ -32,7 +32,10 @@ dependencies:
   flutter_swiper: ^1.1.6
   # 下拉刷新上提加载
   pull_to_refresh: ^1.6.1
-
+  # 加密
+  crypto: ^2.1.5
+  # 图片
+  cached_network_image: ^2.4.1
 
 dev_dependencies:
   flutter_test:
@@ -48,8 +51,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - imgs/688.jpg
+    - imgs/
+    - imgs/icons/
     - data/example.json
     - data/example_home.json
-    - imgs/icons/
+    
     

@@ -18,8 +18,8 @@ class InfoRecommendProvider extends ChangeNotifier {
   Function get onRefresh => _onRefresh;
   Function get onLoading => _onLoading;
 
-  Function get onRefreshList => _onRefreshList;
-  Function get onLoadingList => _onLoadingList;
+  // Function get onRefreshList => _onRefreshList;
+  // Function get onLoadingList => _onLoadingList;
 
   int page = 1;
   int size = 20;
@@ -27,7 +27,7 @@ class InfoRecommendProvider extends ChangeNotifier {
 
   InfoRecommendProvider() {
     _refreshController = RefreshController(initialRefresh: false);
-    _onRefreshList();
+    _onRefresh();
   }
 
   @override
@@ -39,12 +39,25 @@ class InfoRecommendProvider extends ChangeNotifier {
 
 
   void _onRefresh() async {
-    recommendHeaderQuery({}).then((model) {
-      // _bannerList = model.bannaList;
-      _hotList = model.startArticleList;
-      notifyListeners();
-      _refreshController.refreshCompleted();
-    });
+    this.page = 1;
+    Future.wait([recommendHeaderQuery({}), 
+                 recommendListQuery({'page': page, 'size': size})])
+          .then((value) {
+            var m1 = value.first as RecommendHeaderModel;
+            if (m1 != null && m1.startArticleList != null) {
+              _hotList = m1.startArticleList;
+              _bannerList = m1.bannerList;
+            }
+
+            var m2 = value.last as RecommendListModel;
+            if (m2 != null) {
+              this.page++;
+              total = m2.total;
+              _recomList = [];
+              _recomList.addAll(m2.articleList);
+            }
+            _loadCompleteData();
+          }, onError: _loadError);
   }
 
 
@@ -52,36 +65,53 @@ class InfoRecommendProvider extends ChangeNotifier {
     _onLoadingList();
   }
 
-  void _onRefreshHeader() async {
-    await recommendHeaderQuery(null).then((model) {
-      // _bannerList = model.bannaList;
-      _hotList = model.startArticleList;
-    });
-  }
+  // void _onRefreshHeader() async {
+  //   await recommendHeaderQuery(null).then((model) {
+  //     // _bannerList = model.bannaList;
+  //     _hotList = model.startArticleList;
+  //   });
+  // }
 
-  void _onRefreshList() async {
-    this.page = 1;
-    _recomList = [];
-    _loadList();
-  }
+  // void _onRefreshList() async {
+  //   this.page = 1;
+  //   _recomList = [];
+  //   _loadList();
+  // }
 
   void _onLoadingList() async {
     _loadList();
   }
 
   void _loadList()async {
-    await recommendListQuery({'page': page, "size": size})
-    .then((model){
-      this.page++;
-      total = model.total;
-      _recomList.addAll(model.articleList);
 
-      notifyListeners();
-      if (_recomList.length == total) {
-        _refreshController.loadNoData();
-      }else {
-        _refreshController.loadComplete();
+    var param = Map();
+    param['page'] = page;
+    param['size'] = size;
+
+  await recommendListQuery(param)
+    .then((model){
+      if (model != null) {
+        this.page++;
+        total = model.total;
+        _recomList.addAll(model.articleList);
       }
-    });
+      _loadCompleteData();
+    }, onError: _loadError);
+  }
+
+  _loadCompleteData() {
+    notifyListeners();
+    _refreshController.refreshCompleted();
+    if (_recomList.length == total) {
+       _refreshController.loadNoData();
+    }else {
+      _refreshController.loadComplete();
+    }
+  }
+
+  _loadError(e) {
+    notifyListeners();
+    _refreshController.loadFailed();
+    _refreshController.refreshFailed();
   }
 }

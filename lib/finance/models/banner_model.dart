@@ -1,15 +1,16 @@
 
 class BannerModel {
   String name, url ,link;
-  int sort;
+  int sort, skipType;
 
-  BannerModel({this.name, this.url, this.link, this.sort});
+  BannerModel({this.name, this.url, this.link, this.sort, this.skipType});
 
   factory BannerModel.fromJson(Map<String, dynamic> json) => BannerModel (
     name: json["name"], 
     url: json["url"],
     link: json["link"], 
-    sort: json["sort"]
+    sort: json["sort"],
+    skipType: json["type"],
   );
 
 
@@ -18,5 +19,6 @@ class BannerModel {
     "url": url,
     "link": link,
     "sort": sort,
+    "type": skipType,
   };
 }

@@ -7,20 +7,20 @@ import 'banner_model.dart';
 
 class RecommendHeaderModel {
 
-  List<BannerModel> bannaList;
+  List<BannerModel> bannerList;
   List<ArticleModel> startArticleList;
 
   RecommendHeaderModel({
-    this.bannaList, 
+    this.bannerList, 
     this.startArticleList});
   
   factory RecommendHeaderModel.fromJson(Map<String, dynamic> json) => RecommendHeaderModel (
-    // bannaList: List<BannerModel>.from(json["bannaList"].map((x) => BannerModel.fromJson(x))),
+    bannerList: List<BannerModel>.from(json["bannerList"].map((x) => BannerModel.fromJson(x))),
     startArticleList: List<ArticleModel>.from(json["startArticleList"].map((x) => ArticleModel.fromJson(x)))
   );
 
   Map<String, dynamic> toJson() => {
-    "bannaList": List<dynamic>.from(bannaList.map((e) => e.toJson())),
+    "bannerList": List<dynamic>.from(bannerList.map((e) => e.toJson())),
     "startArticleList": List<dynamic>.from(startArticleList.map((e) => e.toJson())),
   };
 
@@ -28,12 +28,14 @@ class RecommendHeaderModel {
 
 class RecommendListModel {
   int total;
+  int size;
   List<ArticleModel> articleList;
 
-  RecommendListModel({this.total, this.articleList});
+  RecommendListModel({this.total,this.size, this.articleList});
 
   factory RecommendListModel.fromJson(Map<String, dynamic> json) => RecommendListModel (
     total: json["total"],
+    size: json["size"],
     articleList: List<ArticleModel>.from(json["articleList"].map((x) => ArticleModel.fromJson(x)))
     );
 
