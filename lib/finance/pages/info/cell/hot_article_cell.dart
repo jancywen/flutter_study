@@ -14,7 +14,13 @@ class HotArticleCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  ClipRRect(
+    return Padding(
+      padding: EdgeInsets.only(left: 15),
+      child: 
+
+
+
+    ClipRRect(
       borderRadius: BorderRadius.circular(6.0),
       child:Container(
       color: Color.fromARGB(255, 25, 29, 36),
@@ -36,6 +42,6 @@ class HotArticleCell extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }

@@ -3,15 +3,15 @@ import 'package:flutter_study/finance/models/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
-class CelebrityListCell extends StatelessWidget {
+class DepthListCell extends StatelessWidget {
   final ArticleModel model;
   final VoidCallback onPressed;
 
-  CelebrityListCell({Key key, this.model, this.onPressed});
+  DepthListCell({Key key, this.model, this.onPressed});
   final titleStyle = TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700);
-  final nicknameStyle = TextStyle(color: Colors.white30, fontSize: 12);
-  final timeStyle = TextStyle(color: Colors.white30, fontSize: 12);
+  final subStyle = TextStyle(color: Colors.white30, fontSize: 12);
+  final markStyle = TextStyle(color: Color.fromARGB(255, 255, 230, 169), fontSize: 12);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -45,21 +45,11 @@ class CelebrityListCell extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children:<Widget>[
                     Row(children: <Widget>[
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(16.0),
-                        child: CachedNetworkImage(
-                          imageUrl: model.authorIcon ?? "",
-                          width: 32,
-                          height: 32,
-                          fit: BoxFit.cover,
-                          placeholder: (context, url) => Image.asset("imgs/avatar.png",),
-                          errorWidget: (context, url, _) => Image.asset("imgs/avatar.png",),
-                        )
-                      ),
-                      SizedBox(width: 10,),
-                      Text(model.authorName ?? "", style: nicknameStyle),
+                      Text(model.platformName ?? "", style: subStyle,),
+                      SizedBox(width: 20,),
+                      Text(model.authorName ?? "", style: subStyle),
                     ],),
-                    Text(model.releaseTime, style: timeStyle)
+                    Text("深度好文", style: markStyle)
                   ]
                 )
               ],
