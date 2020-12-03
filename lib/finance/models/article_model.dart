@@ -2,7 +2,7 @@
 
 
 class ArticleModel {
-  String id, title, authorName, firstPic, releaseTime, platformName;
+  String id, title, authorName, firstPic, releaseTime, platformName, content, authorIcon;
 
   ArticleModel({
     this.id, 
@@ -10,7 +10,9 @@ class ArticleModel {
     this.authorName, 
     this.firstPic, 
     this.releaseTime, 
-    this.platformName});
+    this.platformName, 
+    this.content, 
+    this.authorIcon});
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) => ArticleModel (
     id: json["id"], 
@@ -18,7 +20,9 @@ class ArticleModel {
     authorName: json["authorName"], 
     firstPic: json["firstPic"],
     releaseTime: json["releaseTime"],
-    platformName: json["platformName"]
+    platformName: json["platformName"], 
+    content: json["content"],
+    authorIcon: json["authorIcon"],
   );
 
 
@@ -29,5 +33,7 @@ class ArticleModel {
     "firstPic": firstPic,
     "releaseTime": releaseTime,
     "platformName": platformName,
+    "content": content,
+    "authorIcon": authorIcon
   };
 }

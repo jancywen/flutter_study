@@ -11,7 +11,7 @@ class InfoTabBarView extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     
-    var viewList = [RecommendPage(), Page1(), Page1(), Page1()];
+    var viewList = [RecommendPage(), FlashPage(), CelebrityPage(), DefiPage()];
     return TabBarView(
       children: viewList, 
       controller: tabController,);

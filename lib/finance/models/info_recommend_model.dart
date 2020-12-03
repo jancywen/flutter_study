@@ -26,14 +26,14 @@ class RecommendHeaderModel {
 
 }
 
-class RecommendListModel {
+class ArticleListModel {
   int total;
   int size;
   List<ArticleModel> articleList;
 
-  RecommendListModel({this.total,this.size, this.articleList});
+  ArticleListModel({this.total,this.size, this.articleList});
 
-  factory RecommendListModel.fromJson(Map<String, dynamic> json) => RecommendListModel (
+  factory ArticleListModel.fromJson(Map<String, dynamic> json) => ArticleListModel (
     total: json["total"],
     size: json["size"],
     articleList: List<ArticleModel>.from(json["articleList"].map((x) => ArticleModel.fromJson(x)))

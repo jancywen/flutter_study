@@ -7,6 +7,9 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_study/finance/models/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'cell/recommend_list_cell.dart';
+import 'cell/banner_item.dart';
+import 'cell/hot_article_cell.dart';
 
 class RecommendPage extends StatelessWidget {
   @override
@@ -47,7 +50,7 @@ class RecommendPage extends StatelessWidget {
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: sp.hotList.length,
-                    itemExtent: 120,
+                    itemExtent: 222,
                     itemBuilder: (context, index){
                       return HotArticleCell(
                         model: sp.hotList[index], 
@@ -85,126 +88,5 @@ class RecommendPage extends StatelessWidget {
             ]
           ),);
       } ));
-  }
-}
-
-
-class BannerItem extends StatelessWidget {
-
-  final BannerModel model;
-
-  BannerItem({Key key, this.model}): super(key: key);
-
-  final titleStyle = TextStyle(color: Colors.white, fontSize: 16);
-  final subTitleStyle = TextStyle(color: Colors.white30, fontSize: 12);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.fromLTRB(15, 7.5, 15, 7.5),
-        child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              // child: Image.asset("imgs/688.jpg", width: 130, height: 82),
-              child: CachedNetworkImage(
-                imageUrl: model.url ?? "",
-                width: 130,
-                height: 82,
-                fit: BoxFit.fill,
-                placeholder: (context, url) => Image.asset("imgs/placeholder.png", width: 130, height: 82),
-                errorWidget: (context, url, _) => Image.asset("imgs/placeholder.png", width: 130, height: 82),
-                ),
-            ),
-      );
-  }
-}
-
-class RecommendListCell extends StatelessWidget {
-
-  final ArticleModel model;
-  final VoidCallback onPressed;
-  RecommendListCell({Key key, this.model, this.onPressed}) : super(key: key);
-
-  final titleStyle = TextStyle(color: Colors.white, fontSize: 16);
-  final subTitleStyle = TextStyle(color: Colors.white30, fontSize: 12);
-  @override
-  Widget build(BuildContext context) {
-    return 
-    GestureDetector(
-      onTap: onPressed,
-      child:Container(
-        height: 82,
-        padding: EdgeInsets.fromLTRB(15, 7.5, 15, 7.5),
-        child: Row(
-          children: <Widget> [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(model.title ?? "", maxLines: 2, style: titleStyle,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children:<Widget> [
-                      Text(model.platformName ?? "", style: subTitleStyle),
-                      Text(model.releaseTime ?? "", style: subTitleStyle)
-                    ]
-                  )
-                ],
-              )
-            ,),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-              // child: Image.asset("imgs/688.jpg", width: 130, height: 82),
-              child: CachedNetworkImage(
-                imageUrl: model.firstPic ?? "",
-                width: 130,
-                height: 82,
-                fit: BoxFit.fill,
-                placeholder: (context, url) => Image.asset("imgs/placeholder.png", width: 130, height: 82),
-                errorWidget: (context, url, _) => Image.asset("imgs/placeholder.png", width: 130, height: 82),
-                ),
-            )
-          ]
-        )
-      )
-    );
-  }
-}
-
-class HotArticleCell extends StatelessWidget {
-  final ArticleModel model;
-  final VoidCallback onPressed;
-  HotArticleCell({Key key, this.model, this.onPressed}) : super(key: key);
-
-
-  final markStyle = TextStyle(color: Color.fromARGB(255, 255, 211, 99), fontSize: 12,fontWeight: FontWeight.bold);
-  final titleStyle = TextStyle(color: Colors.white, fontSize: 16);
-  final subTitleStyle = TextStyle(color: Colors.white30, fontSize: 12);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 222,
-      height: 120,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(6.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text("热门文章",style: markStyle),
-            Text(model.title ?? "", style: titleStyle,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(model.platformName ?? "", style: subTitleStyle),
-                Text(model.releaseTime ?? "", style: subTitleStyle)
-              ],
-            )
-
-          ],
-        ),
-      ),
-    );
   }
 }

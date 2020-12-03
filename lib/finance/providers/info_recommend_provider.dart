@@ -49,7 +49,7 @@ class InfoRecommendProvider extends ChangeNotifier {
               _bannerList = m1.bannerList;
             }
 
-            var m2 = value.last as RecommendListModel;
+            var m2 = value.last as ArticleListModel;
             if (m2 != null) {
               this.page++;
               total = m2.total;
