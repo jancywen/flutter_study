@@ -38,6 +38,8 @@ dependencies:
   webview_flutter: ^1.0.7
   # web socket
   web_socket_channel: ^1.1.0
+  # 解压
+  archive: ^2.0.13
 
 dev_dependencies:
   flutter_test:

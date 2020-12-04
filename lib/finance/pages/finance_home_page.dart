@@ -45,12 +45,12 @@ class _FinanceHomePageState extends State<FinanceHomePage> {
         .map((item) => BottomNavigationBarItem(
           icon: Image.asset(
             item.normalIcon, 
-            width:30.0, 
-            height: 30.0), 
+            width:23.0, 
+            height: 23.0), 
           activeIcon: Image.asset(
             item.activeIcon, 
-            width:30.0, 
-            height: 30.0), 
+            width:23.0, 
+            height: 23.0), 
           label: item.name)
         ).toList();
     }

@@ -3,7 +3,7 @@ import 'package:flutter_study/finance/models/index.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_study/finance/providers/info_celebrity_provider.dart';
-import 'cell/celebrity_List_cell.dart';
+import 'cell/celebrity_list_cell.dart';
 
 class CelebrityPage extends StatelessWidget {
   @override
