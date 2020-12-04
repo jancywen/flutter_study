@@ -1,6 +1,7 @@
 
 const String BASE_URL = "http://47.112.254.78:8090";
 
+
 class API {
   // 推荐 头部
   static const String recommend_header_path = "/here/v1/home";
@@ -14,4 +15,8 @@ class API {
   static const String defi_list_path = "/here/v1/defi";
   // 深度
   static const String depth_list_path = "/here/v1/depth";
+}
+
+String formatUrl(String path) {
+  return BASE_URL + path;
 }

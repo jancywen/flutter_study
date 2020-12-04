@@ -9,9 +9,7 @@ import 'response_code.dart';
 
 import 'package:flutter_study/finance/util/crypto_util.dart';
 
-String formatUrl(String path) {
-  return BASE_URL + path;
-}
+
 
 Future get(path, {dynamic data}) {
   var signParam = getSignParam(data);
