@@ -5,6 +5,10 @@ import 'package:provider/provider.dart';
 import 'package:flutter_study/finance/providers/info_celebrity_provider.dart';
 import 'cell/celebrity_list_cell.dart';
 
+import 'package:flutter_study/finance/pages/webview/index.dart';
+import 'package:flutter_study/finance/util/h5_api_util.dart';
+
+
 class CelebrityPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,10 @@ class CelebrityPage extends StatelessWidget {
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (_, index){
-                        return CelebrityListCell(model: cp.dataList[index], onPressed: (){},);
+                        return CelebrityListCell(model: cp.dataList[index], onPressed: (){
+                          var id = cp.dataList[index].id ?? "";
+                          _pressedArticle(context, id);
+                        },);
                       },
                       childCount: cp.dataList.length,
                       ),
@@ -37,6 +44,16 @@ class CelebrityPage extends StatelessWidget {
       ),
     );
   }
+
+
+    void _pressedArticle(BuildContext context, String id) {
+    Navigator.push(context, MaterialPageRoute(builder: (context){
+      return WebViewPage(url: formatH5Url(H5API.info_detail_path, id), title: "文章详情");
+       }
+      )
+    );
+  }
+
 }
 
 

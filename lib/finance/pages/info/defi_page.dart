@@ -5,6 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:flutter_study/finance/providers/info_defi_provider.dart';
 import 'cell/recommend_list_cell.dart';
 
+import 'package:flutter_study/finance/pages/webview/index.dart';
+import 'package:flutter_study/finance/util/h5_api_util.dart';
+
 
 class DefiPage extends StatelessWidget {
   @override
@@ -24,7 +27,10 @@ class DefiPage extends StatelessWidget {
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (_, index){
-                        return RecommendListCell(model: cp.dataList[index], onPressed: (){},);
+                        return RecommendListCell(model: cp.dataList[index], onPressed: (){
+                          var id = cp.dataList[index].id ?? "";
+                          _pressedArticle(context, id);
+                        },);
                       },
                       childCount: cp.dataList.length,
                       ),
@@ -38,4 +44,14 @@ class DefiPage extends StatelessWidget {
       ),
     );
   }
+
+
+    void _pressedArticle(BuildContext context, String id) {
+    Navigator.push(context, MaterialPageRoute(builder: (context){
+      return WebViewPage(url: formatH5Url(H5API.info_detail_path, id), title: "文章详情");
+       }
+      )
+    );
+  }
+
 }

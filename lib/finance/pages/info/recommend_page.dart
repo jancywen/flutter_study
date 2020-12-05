@@ -11,6 +11,10 @@ import 'cell/recommend_list_cell.dart';
 import 'cell/banner_item.dart';
 import 'cell/hot_article_cell.dart';
 
+import 'package:flutter_study/finance/pages/webview/index.dart';
+import 'package:flutter_study/finance/util/h5_api_util.dart';
+
+
 class RecommendPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -55,7 +59,8 @@ class RecommendPage extends StatelessWidget {
                       return HotArticleCell(
                         model: sp.hotList[index], 
                         onPressed:(){
-                          print("press hot article" + sp.hotList[index].id ?? "");
+                          var id = sp.hotList[index].id ?? "";
+                          _pressedArticle(context, id);
                         });
                     }),
                   )
@@ -79,7 +84,8 @@ class RecommendPage extends StatelessWidget {
                   return RecommendListCell(
                     model: sp.recomList[index], 
                     onPressed: (){
-                      print( "press cell on " + sp.recomList[index].id);
+                      var id = sp.recomList[index].id ?? "";
+                      _pressedArticle(context, id);
                   },);
                 }, 
                 childCount: sp.recomList.length
@@ -89,4 +95,13 @@ class RecommendPage extends StatelessWidget {
           ),);
       } ));
   }
+
+  void _pressedArticle(BuildContext context, String id) {
+    Navigator.push(context, MaterialPageRoute(builder: (context){
+      return WebViewPage(url: formatH5Url(H5API.info_detail_path, id), title: "文章详情");
+       }
+      )
+    );
+  }
+
 }

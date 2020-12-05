@@ -1,4 +1,6 @@
 
+import 'package:flutter/foundation.dart';
+
 import 'api.dart';
 import 'request.dart';
 import 'dart:convert';
@@ -39,4 +41,31 @@ Future<ArticleListModel> defiListQuery(data) {
 Future<ArticleListModel> depthListQuery(data) {
   return get(API.depth_list_path, data: data)
     .then((data) => ArticleListModel.fromJson(data));
+}
+
+// 注册
+Future registerQuery(data) {
+  return post(API.register_path, data:data).then((value) => debugPrint(value));
+}
+
+// 登录
+Future loginQuery(data) {
+  return post(API.login_path, data: data).then((value) => debugPrint(value));
+}
+
+// 发送短信
+Future sendVerificationCode(data) {
+  return post(API.send_code_path, data: data).then((value) => debugPrint(value));
+}
+  // 获取用户信息
+Future userInfoQuery(data) {
+  return get(API.user_info_path, data: data).then((value) => debugPrint(value));
+}
+  // 获取入驻信息
+Future settledStatusQuery(data) {
+  return get(API.settled_status_path, data: data).then((value) => debugPrint(value));
+}
+  // 入驻
+Future settledAction(data) {
+  return post(API.settled_commit_path, data: data).then((value) => debugPrint(value));
 }

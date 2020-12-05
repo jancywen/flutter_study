@@ -15,6 +15,24 @@ class API {
   static const String defi_list_path = "/here/v1/defi";
   // 深度
   static const String depth_list_path = "/here/v1/depth";
+
+  // 发送验证码
+  static const String send_code_path = "/here/v1/user/sendSmsCode";
+  // 注册
+  static const String register_path = "/here/v1/user/register";
+  // 登录
+  static const String login_path = "/here/v1/user/login";
+  // 退出
+  static const String logout_path = "";
+  // 获取用户信息
+  static const String user_info_path = "/here/v1/user/getUserInfo";
+  // 获取入驻信息
+  static const String settled_status_path = "/here/v1/user/enterInfo";
+  // 入驻
+  static const String settled_commit_path = "/here/v1/user/enter";
+
+
+
 }
 
 String formatUrl(String path) {
