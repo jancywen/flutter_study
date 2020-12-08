@@ -40,7 +40,7 @@ class _MarketHomeState extends State<MarketHome> {
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    subTicker();
+    // subTicker();
   }
 
   void subTicker() {

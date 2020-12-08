@@ -45,25 +45,26 @@ Future<ArticleListModel> depthListQuery(data) {
 
 // 注册
 Future registerQuery(data) {
-  return post(API.register_path, data:data).then((value) => debugPrint(value));
+  return post(API.register_path, data:data);
 }
 
 // 登录
 Future loginQuery(data) {
-  return post(API.login_path, data: data).then((value) => debugPrint(value));
+  return post(API.login_path, data: data);
 }
 
 // 发送短信
 Future sendVerificationCode(data) {
-  return post(API.send_code_path, data: data).then((value) => debugPrint(value));
+  return post(API.send_code_path, data: data);
 }
   // 获取用户信息
 Future userInfoQuery(data) {
-  return get(API.user_info_path, data: data).then((value) => debugPrint(value));
+  return get(API.user_info_path, data: data)
+  .then((value) => UserInfo.fromJson(value));
 }
   // 获取入驻信息
 Future settledStatusQuery(data) {
-  return get(API.settled_status_path, data: data).then((value) => debugPrint(value));
+  return get(API.settled_status_path, data: data);
 }
   // 入驻
 Future settledAction(data) {

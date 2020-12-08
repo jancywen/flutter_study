@@ -9,16 +9,16 @@ class UserInfo {
   
   factory UserInfo.fromJson(Map<String, dynamic> json) => UserInfo(
     id: json["id"],
-    nickname: json["nickname"],
-    iphone: json["iphone"],
-    avatar: json["avatar"],
+    nickname: json["userName"],
+    iphone: json["mobile"],
+    avatar: json["userIcon"],
   );
 
   Map<String,dynamic> toJson() => {
     "id": id,
-    "nickname": nickname,
-    "iphone": iphone,
-    "avatar": avatar,
+    "userName": nickname,
+    "mobile": iphone,
+    "userIcon": avatar,
   };
 
 }

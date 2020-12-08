@@ -8,6 +8,7 @@ import 'result_obj.dart';
 import 'response_code.dart';
 
 import 'package:flutter_study/finance/util/crypto_util.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
@@ -27,6 +28,9 @@ Future request(url, {dynamic data, String method}) async {
   print("url: $url");
   print("参数：$data");
 
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString("TOKEN");
+
   try {
     Response response;
     Dio dio = Dio();
@@ -35,7 +39,7 @@ Future request(url, {dynamic data, String method}) async {
       data: data,
       options: Options(
         method: method ?? "GET", 
-        headers: {"language": "ZH"},
+        headers: {"language": "ZH", "token": token ?? ""},
         responseType: ResponseType.json,
         responseDecoder: (List<int> responseBytes, RequestOptions options,
          ResponseBody responseBody){

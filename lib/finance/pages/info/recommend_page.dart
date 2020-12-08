@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_study/finance/index.dart';
+import 'package:flutter_study/finance/providers/index.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_study/finance/providers/info_recommend_provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -15,12 +16,14 @@ import 'package:flutter_study/finance/pages/webview/index.dart';
 import 'package:flutter_study/finance/util/h5_api_util.dart';
 
 
+import 'package:flutter_study/finance/pages/login/login_page.dart';
+
 class RecommendPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => InfoRecommendProvider(),
-      child: Consumer<InfoRecommendProvider>(builder: (_, sp, __){ 
+      child: Consumer2<InfoRecommendProvider, UserProvider>(builder: (_, sp, up, __){ 
         return SmartRefresher(
           controller: sp.refreshController, 
           enablePullDown: true, 
@@ -28,9 +31,14 @@ class RecommendPage extends StatelessWidget {
           onRefresh: sp.onRefresh, 
           onLoading: sp.onLoading, 
           child: CustomScrollView(
-            slivers: <Widget> [
-              
-              SliverToBoxAdapter(
+            slivers: _siliverList(context, sp, up).toList()
+          ),);
+      } ));
+  }
+
+  List<Widget> _siliverList(BuildContext context ,InfoRecommendProvider sp, UserProvider up) {
+    List<Widget> list = [];
+    var banner = SliverToBoxAdapter(
                 child: Container(
                   height: 200,
                   child: Swiper(
@@ -45,9 +53,8 @@ class RecommendPage extends StatelessWidget {
                       print(sp.bannerList[index]);
                     },), 
                   )
-              ),
-
-              SliverToBoxAdapter(
+              );
+    var hot = SliverToBoxAdapter(
                 child: Container(
                   height: sp.hotList.length == 0 ? 0 : 135,
                   padding: EdgeInsets.fromLTRB(15, 7.5, 0, 7.5),
@@ -64,22 +71,22 @@ class RecommendPage extends StatelessWidget {
                         });
                     }),
                   )
-              ),
+              );
 
-
-              SliverPadding(
+    var settled = SliverPadding(
                 padding: EdgeInsets.fromLTRB(15, 7.5, 15, 7.5),
                 sliver: SliverToBoxAdapter(
                   child: GestureDetector(
                     child: Image.asset("imgs/settled_icon.png"),
                     onTap:(){
-                      print("入驻");
+                      Navigator.push(context, MaterialPageRoute(builder: (context){
+                        return LoginPage();
+                      }));
                     }
                   ),
                 ),
-                ),
-
-              SliverList(delegate: new SliverChildBuilderDelegate(
+                );
+    var tav = SliverList(delegate: new SliverChildBuilderDelegate(
                 (BuildContext context, int index){
                   return RecommendListCell(
                     model: sp.recomList[index], 
@@ -89,11 +96,15 @@ class RecommendPage extends StatelessWidget {
                   },);
                 }, 
                 childCount: sp.recomList.length
-              )),
-              
-            ]
-          ),);
-      } ));
+              ));
+
+    list.add(banner);
+    list.add(hot);
+    if (up.settledStatus != 3) {
+      list.add(settled);
+    }
+    list.add(tav);
+    return list;
   }
 
   void _pressedArticle(BuildContext context, String id) {
