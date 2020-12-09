@@ -16,7 +16,8 @@ import 'package:flutter_study/finance/pages/webview/index.dart';
 import 'package:flutter_study/finance/util/h5_api_util.dart';
 
 
-import 'package:flutter_study/finance/pages/login/login_page.dart';
+import 'package:flutter_study/finance/pages/my/index.dart';
+import 'package:flutter_study/finance/pages/login/index.dart';
 
 class RecommendPage extends StatelessWidget {
   @override
@@ -79,9 +80,21 @@ class RecommendPage extends StatelessWidget {
                   child: GestureDetector(
                     child: Image.asset("imgs/settled_icon.png"),
                     onTap:(){
-                      Navigator.push(context, MaterialPageRoute(builder: (context){
-                        return LoginPage();
-                      }));
+                      if(up.token == null) {
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(
+                            builder: (context){
+                            return LoginPage();
+                          }));
+                      }else {
+                        if (up.settledStatus == null || up.settledStatus == 1) {
+                          Navigator.push(context, MaterialPageRoute(builder: (context){return ApplyPage();}));
+                        }else {
+                          Navigator.push(context, MaterialPageRoute(builder: (context){return ApplyResultPage();}));
+                        }
+                      }
+                      
                     }
                   ),
                 ),

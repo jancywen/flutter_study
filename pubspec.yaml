@@ -60,6 +60,7 @@ flutter:
     - imgs/
     - imgs/icons/
     - imgs/setting/
+    - imgs/apply/
     - data/example.json
     - data/example_home.json
     
