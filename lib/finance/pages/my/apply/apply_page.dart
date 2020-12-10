@@ -28,36 +28,11 @@ class _ApplyPageState extends State<ApplyPage> with SingleTickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       backgroundColor: Color(0xff0c0e12),
       // appBar: _appBar(),
       body: Stack(
       children: [
-        Positioned(top: 0,
-          child: Image.asset("imgs/apply/apply_header.png", height: 194, fit: BoxFit.cover,width: ScreenUtil().screenWidth,)),
-        Positioned(
-          top: 20,
-          child: Container(
-            height: 44,
-            width: ScreenUtil().screenWidth,
-            child: Row(
-              children: <Widget>[
-                FlatButton(
-                  height: 44,
-                  minWidth: 40,
-                  onPressed: () => Navigator.pop(context), 
-                  child: Image.asset("imgs/nav_back.png", height: 20,)),
-                Expanded(
-                  child: Text(
-                    "平台发文申请", 
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                SizedBox(width: 40)
-              ],
-            ),)
-
-        ),
         Positioned.fill(top: 194, child: Container(color: Color(0xff0c0e12),)),
         Positioned.fill(
           top: 0,
@@ -66,13 +41,21 @@ class _ApplyPageState extends State<ApplyPage> with SingleTickerProviderStateMix
             child: NestedScrollView(
               headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
                 return <Widget>[
-                  // SliverToBoxAdapter(
-                  //   child: SizedBox(height:100),
-                  // ),
                   SliverAppBar(
+                    title: Text(
+                      "平台发文申请", 
+                      style: TextStyle(
+                        color: Color(0xff0c0e12), 
+                        fontSize: 16, 
+                        fontWeight: FontWeight.bold),),
+                    iconTheme: IconThemeData(color: Color(0xff0c0e12)),
+                    backgroundColor: Color(0xffFFD363),
                     expandedHeight: 160.0,
                     pinned: true,
-
+                    flexibleSpace: FlexibleSpaceBar(
+                      background: Image.asset("imgs/apply/apply_header.png", fit: BoxFit.fill,)
+                    ),
+                    shadowColor: Color(0xff)
                   ),
                   SliverPersistentHeader(
                     pinned: true,
@@ -82,20 +65,6 @@ class _ApplyPageState extends State<ApplyPage> with SingleTickerProviderStateMix
               },
               body: ApplyTabBarView(tabController: _tabController,)
               ))
-          // CustomScrollView(
-          //   slivers: [
-          //     SliverToBoxAdapter(
-          //       child: SizedBox(height: 105)
-          //     ),
-          //     SliverPersistentHeader(
-          //       pinned: true,
-          //       delegate: ApplyItemsSliverPersistentHeader(tabController: _tabController)
-          //     ),
-          //     // SliverToBoxAdapter(
-          //     //   child: ApplyTabBarView(tabController: _tabController,)
-          //     // )
-          //   ],
-          // ),
         ),
       ],
     )
@@ -114,43 +83,34 @@ class _ApplyPageState extends State<ApplyPage> with SingleTickerProviderStateMix
 
 class ApplyItemsSliverPersistentHeader extends SliverPersistentHeaderDelegate {
 
-final TabController tabController;
-ApplyItemsSliverPersistentHeader({Key key, @required this.tabController});
+  final TabController tabController;
+  ApplyItemsSliverPersistentHeader({Key key, @required this.tabController});
+  
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     
-    return Container(
-      // color: Color(0xff0c0e12),
+    return Stack(children: [
+      Positioned(
+        child: Container(
+          height: 90,
+          color: Color(0xffffd363),
+        )
+      ),
+      Positioned.fill(
+        child: Container(
       decoration: BoxDecoration(
         color: Color(0xff0c0e12),
         borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20))),
       height: 90,
       child: Container(
         padding: EdgeInsets.only(left:15, right: 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ApplyTabItem(
-              bgImage: tabController.index == 0 ? 
-                "imgs/apply/apply_personal_selected.png" : 
-                "imgs/apply/apply_personal_unselected.png", 
-              title: "个人",
-              onTap: () {
-                tabController.index = 0;
-              },),
-            ApplyTabItem(
-              bgImage: tabController.index == 1 ? 
-                "imgs/apply/apply_enterprise_selected.png" : 
-                "imgs/apply/apply_enterprise_unselected.png", 
-              title: "企业",
-              onTap: () {
-                tabController.index = 1;
-              },),
-          ]
+        child: 
+        ItemSwitchBar(onTapItem: (int index){tabController.index = index;},)
         ),
-        ),
-      );
+      )
+        )
+    ],);
 
   }
 
@@ -167,13 +127,83 @@ ApplyItemsSliverPersistentHeader({Key key, @required this.tabController});
 }
 
 
+class ItemSwitchBar extends StatefulWidget {
+
+  final Function(int a) onTapItem;
+
+  ItemSwitchBar({Key key, this.onTapItem});
+
+  @override
+  _ItemSwitchBarState createState() => _ItemSwitchBarState();
+}
+
+class _ItemSwitchBarState extends State<ItemSwitchBar> {
+
+  int selectedIndex;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    selectedIndex = 0;
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ApplyTabItem(
+              bgImage: selectedIndex == 0 ? 
+                "imgs/apply/apply_personal_selected.png" : 
+                "imgs/apply/apply_personal_unselected.png", 
+              title: "个人",
+              textStyle: TextStyle(
+                fontSize: 16, 
+                fontWeight: FontWeight.w400, 
+                color: selectedIndex == 0 
+                  ? Color(0xff0c0e12)
+                  : Color(0xfff9f7f4)),
+              onTap: () {
+                if (selectedIndex != 0) {
+                  setState(() {
+                    selectedIndex = 0;
+                  });
+                  widget.onTapItem(0);
+                }
+                
+              },),
+            ApplyTabItem(
+              bgImage: selectedIndex == 1 ? 
+                "imgs/apply/apply_enterprise_selected.png" : 
+                "imgs/apply/apply_enterprise_unselected.png", 
+              title: "企业",
+              textStyle: TextStyle(
+                fontSize: 16, 
+                fontWeight: FontWeight.w400, 
+                color: selectedIndex == 1 
+                  ? Color(0xff0c0e12)
+                  : Color(0xfff9f7f4)),
+              onTap: () {
+                if (selectedIndex != 1) {
+                  setState(() {
+                    selectedIndex = 1;
+                  });
+                  widget.onTapItem(1);
+                }
+              },),
+          ]
+        );
+  }
+}
+
+
 class ApplyTabItem extends StatelessWidget {
 
   final String bgImage;
   final String title;
+  final TextStyle textStyle;
   final VoidCallback onTap;
 
-  ApplyTabItem({Key key, this.bgImage, this.title, this.onTap}); 
+  ApplyTabItem({Key key, this.bgImage, this.title,this.textStyle, this.onTap}); 
 
   @override
   Widget build(BuildContext context) {
@@ -185,7 +215,7 @@ class ApplyTabItem extends StatelessWidget {
         child: Stack(
           children: [
             Positioned.fill(child: Image.asset(bgImage)),
-            Positioned.fill(child: Text(title, textAlign: TextAlign.center,))
+            Positioned.fill(child: Center(child: Text(title, textAlign: TextAlign.center, style: textStyle)))
           ],),
         ),
     );

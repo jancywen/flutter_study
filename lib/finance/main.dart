@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
           
           primarySwatch: Colors.blue, 
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          // primaryColor:  Color.fromARGB(255, 27, 29, 36),
+          primaryColor:  Color(0xff0c0e12),
           textTheme: TextTheme(
             headline1: TextStyle(color: Colors.white, fontSize: 16), 
             headline2: TextStyle(color: Colors.white30, fontSize: 12),
