@@ -122,7 +122,7 @@ class _MarketHomeState extends State<MarketHome> {
 
 //解压
   _gunZip(List<int> data) {
-    print("gunzip");
+    // print("gunzip");
     List<int> bytes = GZipDecoder().decodeBytes(data);
     String json = String.fromCharCodes(bytes);
     MarketData md = MarketData.fromJson(jsonDecode(json));

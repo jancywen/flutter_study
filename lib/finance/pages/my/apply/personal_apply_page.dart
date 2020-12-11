@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'apply_item_widget.dart';
+import 'sample_dialog.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 
 class PersonalApplyPage extends StatefulWidget {
@@ -22,6 +25,9 @@ class _PersonalApplyPageState extends State<PersonalApplyPage> {
   List<ApplyItemModel> cardList;
   List<ApplyItemModel> materialList;
 
+  final ImagePicker _picker = ImagePicker();
+  ApplyItemType currentItem;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -29,35 +35,44 @@ class _PersonalApplyPageState extends State<PersonalApplyPage> {
     check = false;
     cardList = [
       ApplyItemModel(
-        type: ApplyItemType.cardFront,
-        imv: ""),
+        type: ApplyItemType.cardFront,),
       ApplyItemModel(
-        type: ApplyItemType.cardBack, 
-        imv: ""),
+        type: ApplyItemType.cardBack,),
     ];
     materialList = [
       ApplyItemModel(
-        type: ApplyItemType.material, 
-        imv: ""),
+        type: ApplyItemType.material,),
     ];
   }
 
 
 /// 上传图片
-  void _tapItem(ApplyItemModel item) {
-    switch (item.type) {
-      case ApplyItemType.cardFront:
-        print("上传前面");
-        break;
-      case ApplyItemType.cardBack:
-        print("后面");
-        break;
-      case ApplyItemType.material:
-        print("资料");
-        break;
-      default:
-        break;
-    }
+  void _tapItem(BuildContext context, ApplyItemModel item) async {
+
+    await onPressedGetImageButton(context, 
+      (ImageSource source) async{
+        try {
+          final pickedFile = await _picker.getImage(source: source);
+          setState(() {
+            switch (item.type) {
+              case ApplyItemType.cardFront:
+                cardList.first.file = pickedFile;
+                break;
+              case ApplyItemType.cardBack:
+                cardList.last.file = pickedFile;
+                break;
+              case ApplyItemType.material:
+                materialList.insert(0, ApplyItemModel(type: ApplyItemType.material, file: pickedFile));
+                break;
+              default:
+                break;
+            }
+          });
+        } catch (e) {
+          print(e.toString());
+        }
+    });
+
   }
 
   @override
@@ -113,7 +128,7 @@ class _PersonalApplyPageState extends State<PersonalApplyPage> {
               SizedBox(width: 10),
               GestureDetector(
                 child: Text("查看样本", style: tipStyle,),
-                onTap: () => debugPrint("证件"),
+                onTap: () {showCardDialog(context);},
               ),
             ]
           ),
@@ -125,7 +140,11 @@ class _PersonalApplyPageState extends State<PersonalApplyPage> {
           SliverGrid(
             delegate: new SliverChildBuilderDelegate(
               (BuildContext context, int index){
-                return ApplyItemWidget(item: cardList[index], onTapItem: _tapItem);
+                return ApplyItemWidget(
+                  item: cardList[index], 
+                  onTapItem: (item){
+                    _tapItem(context, item);
+                  });
               }, childCount: cardList.length), 
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -145,7 +164,9 @@ class _PersonalApplyPageState extends State<PersonalApplyPage> {
                     SizedBox(width: 10),
                     GestureDetector(
                       child: Text("查看样本", style: tipStyle,),
-                      onTap: () => debugPrint("资质材料"),
+                      onTap: () {
+                        showMaterialDialog(context);
+                      },
                       ),
                   ]
                 ),
@@ -162,7 +183,11 @@ class _PersonalApplyPageState extends State<PersonalApplyPage> {
           SliverGrid(
             delegate: new SliverChildBuilderDelegate(
               (BuildContext context, int index){
-                return ApplyItemWidget(item: materialList[index], onTapItem: _tapItem);
+                return ApplyItemWidget(
+                  item: materialList[index], 
+                  onTapItem: (item){
+                    _tapItem(context, item);
+                  });
               }, childCount: materialList.length), 
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,

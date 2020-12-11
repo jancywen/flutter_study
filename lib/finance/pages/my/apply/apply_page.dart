@@ -28,47 +28,35 @@ class _ApplyPageState extends State<ApplyPage> with SingleTickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       backgroundColor: Color(0xff0c0e12),
-      // appBar: _appBar(),
-      body: Stack(
-      children: [
-        Positioned.fill(top: 194, child: Container(color: Color(0xff0c0e12),)),
-        Positioned.fill(
-          top: 0,
-          child: DefaultTabController(
-            length: 2, 
-            child: NestedScrollView(
-              headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
-                return <Widget>[
-                  SliverAppBar(
-                    title: Text(
-                      "平台发文申请", 
-                      style: TextStyle(
-                        color: Color(0xff0c0e12), 
-                        fontSize: 16, 
-                        fontWeight: FontWeight.bold),),
-                    iconTheme: IconThemeData(color: Color(0xff0c0e12)),
-                    backgroundColor: Color(0xffFFD363),
-                    expandedHeight: 160.0,
-                    pinned: true,
-                    flexibleSpace: FlexibleSpaceBar(
-                      background: Image.asset("imgs/apply/apply_header.png", fit: BoxFit.fill,)
-                    ),
-                    shadowColor: Color(0xff)
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
+          return <Widget>[
+            SliverAppBar(
+              title: Text(
+                "平台发文申请", 
+                style: TextStyle(
+                  color: Color(0xff0c0e12),
+                  fontSize: 16, 
+                  fontWeight: FontWeight.bold),),
+                  iconTheme: IconThemeData(color: Color(0xff0c0e12)),
+                  backgroundColor: Color(0xffFFD363),
+                  expandedHeight: 160.0,
+                  pinned: true,
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Image.asset("imgs/apply/apply_header.png", fit: BoxFit.fill,)
                   ),
-                  SliverPersistentHeader(
-                    pinned: true,
-                    delegate: ApplyItemsSliverPersistentHeader(tabController: _tabController)
-                  )
-                ];
-              },
-              body: ApplyTabBarView(tabController: _tabController,)
-              ))
-        ),
-      ],
-    )
-  );
+                  shadowColor: Color(0xff)
+                ),
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: ApplyItemsSliverPersistentHeader(tabController: _tabController)
+            )
+          ];
+        },
+        body: ApplyTabBarView(tabController: _tabController,)
+      ),
+    );
   }
 
 

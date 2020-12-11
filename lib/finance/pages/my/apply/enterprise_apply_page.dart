@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'apply_item_widget.dart';
+import 'sample_dialog.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EnterpriseApplyPage extends StatefulWidget {
   @override
@@ -14,6 +16,7 @@ class _EnterpriseApplyPageState extends State<EnterpriseApplyPage> {
   TextStyle textStyle = TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500);
   TextStyle tipStyle = TextStyle(color: Color(0xffffd363), fontSize: 12, );
   TextStyle subTitleStyle = TextStyle(color: Color(0xff727373), fontSize: 12);
+  final ImagePicker _picker = ImagePicker();
 
   bool check;
 
@@ -38,17 +41,28 @@ class _EnterpriseApplyPageState extends State<EnterpriseApplyPage> {
   }
 
   /// 上传图片
-  void _tapItem(ApplyItemModel item) {
-    switch (item.type) {
-      case ApplyItemType.businessLicense:
-        print("营业执照");
-        break;
-      case ApplyItemType.material:
-        print("资料");
-        break;
-      default:
-        break;
-    }
+  void _tapItem( ApplyItemModel item) async {
+
+    await onPressedGetImageButton(context, 
+      (ImageSource source) async{
+        try {
+          final pickedFile = await _picker.getImage(source: source);
+          setState(() {
+            switch (item.type) {
+              case ApplyItemType.businessLicense:
+                cardList.first.file = pickedFile;
+                break;
+              case ApplyItemType.material:
+                materialList.insert(0, ApplyItemModel(type: ApplyItemType.material, file: pickedFile));
+                break;
+              default:
+                break;
+            }
+          });
+        } catch (e) {
+          print(e.toString());
+        }
+    });
   }
 
   @override
@@ -103,7 +117,7 @@ class _EnterpriseApplyPageState extends State<EnterpriseApplyPage> {
               Text("营业执照", style: titleStyle,),
               FlatButton(
                 onPressed: (){
-                  print("营业执照");
+                  showBusinessDialog(context);
                 }, 
                 child: Text("查看样本", style: tipStyle,))
             ]
@@ -116,7 +130,11 @@ class _EnterpriseApplyPageState extends State<EnterpriseApplyPage> {
           SliverGrid(
             delegate: new SliverChildBuilderDelegate(
               (BuildContext context, int index){
-                return ApplyItemWidget(item: cardList[index], onTapItem: _tapItem,);
+                return ApplyItemWidget(
+                  item: cardList[index], 
+                  onTapItem: 
+                    _tapItem
+                  ,);
               }, childCount: cardList.length), 
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -135,7 +153,7 @@ class _EnterpriseApplyPageState extends State<EnterpriseApplyPage> {
                     Text("资质材料", style: titleStyle,),
                     FlatButton(
                       onPressed: (){
-                        print("资质材料");
+                        showMaterialDialog(context);
                       }, 
                       child: Text("查看样本", style: tipStyle,))
                   ]
@@ -152,7 +170,10 @@ class _EnterpriseApplyPageState extends State<EnterpriseApplyPage> {
           SliverGrid(
             delegate: new SliverChildBuilderDelegate(
               (BuildContext context, int index){
-                return ApplyItemWidget(item: materialList[index], onTapItem: _tapItem,);
+                return ApplyItemWidget(item: materialList[index], 
+                onTapItem: 
+                  _tapItem
+                ,);
               }, childCount: materialList.length), 
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -230,4 +251,8 @@ class _EnterpriseApplyPageState extends State<EnterpriseApplyPage> {
       
     );
   }
+
+
+
+
 }

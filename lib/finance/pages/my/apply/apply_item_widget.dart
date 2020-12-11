@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
-
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class ApplyItemWidget extends StatelessWidget {
 
@@ -41,11 +42,9 @@ class ApplyItemWidget extends StatelessWidget {
       borderRadius: BorderRadius.circular(4),
       child: Container(
         color: Color(0xff1b1d24),
-        padding: EdgeInsets.all(10),
+        // padding: EdgeInsets.all(10),
         child:Stack(
           children: [
-            Positioned.fill(
-              child: Image.asset("imgs/apply/apply_image_border.png")),
             Positioned.fill(
               child: Center(
                 child: Column(
@@ -55,7 +54,13 @@ class ApplyItemWidget extends StatelessWidget {
                     SizedBox(height: 2),
                     Text(tip, style: TextStyle(fontSize: 12, color: Color(0xff727373)),)
                   ],
-                ))),
+                )
+              )
+            ),
+            Positioned.fill(
+              child: item.file == null 
+              ? Padding(padding: EdgeInsets.all(10), child: Image.asset("imgs/apply/apply_image_border.png", fit: BoxFit.fill,)) 
+              : Image.file(File(item.file.path), fit: BoxFit.fill,)),
           ],)
       ),
     ));
@@ -66,7 +71,8 @@ class ApplyItemWidget extends StatelessWidget {
 class ApplyItemModel  {
   String imv;
   ApplyItemType type;
-  ApplyItemModel({ this.imv, this.type});
+  PickedFile file;
+  ApplyItemModel({ this.imv, this.type, this.file});
 }
 
 enum ApplyItemType {

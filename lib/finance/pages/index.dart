@@ -9,3 +9,4 @@ export 'community/index.dart';
 export 'my/index.dart';
 
 export 'finance_home_page.dart';
+export 'login/index.dart';

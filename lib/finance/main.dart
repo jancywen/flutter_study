@@ -1,25 +1,23 @@
+
 import 'package:flutter/material.dart';
+// import 'package:flutter_study/finance/pages/login/index.dart';
 
 import 'index.dart';
 import 'package:provider/provider.dart';
 import 'providers/providers.dart';
+import 'route.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-
-  final _routeList = {
-    "/finance_home": (context) => FinanceHomePage(),
-  };
 
   Route<dynamic> _onGenerateRoute(RouteSettings settings) {
     String routeName = settings.name;
     print("routeName: $routeName");
-    if (_routeList.containsKey(routeName)) {
-      var f = _routeList[routeName];
+    if (routeList.containsKey(routeName)) {
+      var f = routeList[routeName];
       return MaterialPageRoute(builder: f);
     }
     return null;
@@ -28,7 +26,7 @@ class MyApp extends StatelessWidget {
   Route<dynamic> _onUnknownRoute(RouteSettings settings) {
     String name = settings.name;
     print("未匹配到路由：$name");
-    return MaterialPageRoute(builder: _routeList["/error_page"]);
+    return MaterialPageRoute(builder: routeList["/error_page"]);
   }
   @override
   Widget build(BuildContext context) {
@@ -48,7 +46,7 @@ class MyApp extends StatelessWidget {
             headline2: TextStyle(color: Colors.white30, fontSize: 12),
             ),
           ),
-        routes: _routeList,
+        routes: routeList,
         initialRoute: "/finance_home",
         onGenerateRoute: _onGenerateRoute,
         onUnknownRoute: _onUnknownRoute,

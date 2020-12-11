@@ -35,6 +35,9 @@ class UserProvider extends ChangeNotifier {
   void _readToken() async {
     SharedPreferences prefs = await _prefs;
     _token = prefs.getString("TOKEN");
+    if (_token != null) {
+      _getUserInfo();
+    }
   }
   // 保存token 
   void _saveToken(String token) async {

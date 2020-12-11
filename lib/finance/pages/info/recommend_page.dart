@@ -81,17 +81,13 @@ class RecommendPage extends StatelessWidget {
                     child: Image.asset("imgs/settled_icon.png"),
                     onTap:(){
                       if(up.token == null) {
-                        Navigator.push(
-                          context, 
-                          MaterialPageRoute(
-                            builder: (context){
-                            return LoginPage();
-                          }));
+                        Navigator.pushNamed(context, "/login_page");
                       }else {
                         if (up.settledStatus == null || up.settledStatus == 1) {
-                          Navigator.push(context, MaterialPageRoute(builder: (context){return ApplyPage();}));
+
+                          Navigator.pushNamed(context, "/apply_page");
                         }else {
-                          Navigator.push(context, MaterialPageRoute(builder: (context){return ApplyResultPage();}));
+                          Navigator.pushNamed(context, "/apply_result");
                         }
                       }
                       

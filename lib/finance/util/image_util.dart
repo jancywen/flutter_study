@@ -14,9 +14,11 @@ class HereImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: url ?? "",
-      fit: BoxFit.fill,
-      placeholder: (context, url) => Image.asset(placeholder ?? "imgs/placeholder.png", width: width, height: height),
-      errorWidget: (context, url, _) => Image.asset(placeholder ?? "imgs/placeholder.png", width: width, height: height),
+      fit: BoxFit.cover,
+      width: width,
+      height: height,
+      placeholder: (context, url) => Image.asset(placeholder ?? "imgs/placeholder.png", ),
+      errorWidget: (context, url, _) => Image.asset(placeholder ?? "imgs/placeholder.png",),
       );
   }
 }
