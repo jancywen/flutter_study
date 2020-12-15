@@ -8,20 +8,20 @@ import 'banner_model.dart';
 class RecommendHeaderModel {
 
   List<BannerModel> bannerList;
-  List<ArticleModel> startArticleList;
+  List<ArticleModel> articleList;
 
   RecommendHeaderModel({
     this.bannerList, 
-    this.startArticleList});
+    this.articleList});
   
   factory RecommendHeaderModel.fromJson(Map<String, dynamic> json) => RecommendHeaderModel (
     bannerList: List<BannerModel>.from(json["bannerList"].map((x) => BannerModel.fromJson(x))),
-    startArticleList: List<ArticleModel>.from(json["startArticleList"].map((x) => ArticleModel.fromJson(x)))
+    articleList: List<ArticleModel>.from(json["startArticleList"].map((x) => ArticleModel.fromJson(x)))
   );
 
   Map<String, dynamic> toJson() => {
     "bannerList": List<dynamic>.from(bannerList.map((e) => e.toJson())),
-    "startArticleList": List<dynamic>.from(startArticleList.map((e) => e.toJson())),
+    "articleList": List<dynamic>.from(articleList.map((e) => e.toJson())),
   };
 
 }

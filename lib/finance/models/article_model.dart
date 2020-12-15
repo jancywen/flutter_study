@@ -1,8 +1,16 @@
+import 'package:flutter_study/finance/util/time_util.dart';
 
 
 
 class ArticleModel {
   String id, title, authorName, firstPic, releaseTime, platformName, content, authorIcon;
+
+  String hourMinuteTime() {
+    return shortTime(this.releaseTime);
+  }
+  String formateTime() {
+    return formattingTime(this.releaseTime);
+  }
 
   ArticleModel({
     this.id, 

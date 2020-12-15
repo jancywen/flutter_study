@@ -1,8 +1,5 @@
 
 import 'package:flutter/material.dart';
-// import 'package:flutter_study/finance/pages/login/index.dart';
-
-import 'index.dart';
 import 'package:provider/provider.dart';
 import 'providers/providers.dart';
 import 'route.dart';
@@ -36,11 +33,12 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title:"flutter demo",
         theme: ThemeData(
-          // brightness: Brightness.dark,
-          
+          brightness: Brightness.light,
+          accentColor: Colors.black,//(按钮)Widget前景色为黑色
           primarySwatch: Colors.blue, 
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          primaryColor:  Color(0xff0c0e12),
+          primaryColor:  Color(0xff0c0e12), // 主色调
+          iconTheme:IconThemeData(color: Colors.blue),//icon主题色为蓝色
           textTheme: TextTheme(
             headline1: TextStyle(color: Colors.white, fontSize: 16), 
             headline2: TextStyle(color: Colors.white30, fontSize: 12),

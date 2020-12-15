@@ -39,22 +39,28 @@ class RecommendPage extends StatelessWidget {
 
   List<Widget> _siliverList(BuildContext context ,InfoRecommendProvider sp, UserProvider up) {
     List<Widget> list = [];
+
     var banner = SliverToBoxAdapter(
                 child: Container(
                   height: 200,
-                  child: Swiper(
+                  child: sp.bannerList.length == 0 
+                  ? Container() 
+                  : Swiper(
                     itemBuilder: (_, index){
                     
-                      return BannerItem(
+                      return new BannerItem(
                         model: sp.bannerList[index],
                         );
                     },
                     itemCount: sp.bannerList.length, 
                     onTap: (index){
                       print(sp.bannerList[index]);
-                    },), 
+                    },
+                    pagination: new SwiperPagination(),
+                    ), 
                   )
               );
+    
     var hot = SliverToBoxAdapter(
                 child: Container(
                   height: sp.hotList.length == 0 ? 0 : 135,
@@ -95,6 +101,7 @@ class RecommendPage extends StatelessWidget {
                   ),
                 ),
                 );
+    
     var tav = SliverList(delegate: new SliverChildBuilderDelegate(
                 (BuildContext context, int index){
                   return RecommendListCell(

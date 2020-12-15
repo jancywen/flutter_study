@@ -44,8 +44,8 @@ class InfoRecommendProvider extends ChangeNotifier {
                  recommendListQuery({'page': page, 'size': size})])
           .then((value) {
             var m1 = value.first as RecommendHeaderModel;
-            if (m1 != null && m1.startArticleList != null) {
-              _hotList = m1.startArticleList;
+            if (m1 != null && m1.articleList != null) {
+              _hotList = m1.articleList;
               _bannerList = m1.bannerList;
             }
 

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_study/finance/models/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_study/finance/util/image_util.dart';
 
 class BannerItem extends StatelessWidget {
 
@@ -18,13 +19,7 @@ class BannerItem extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(15, 7.5, 15, 7.5),
         child: ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
-              // child: Image.asset("imgs/688.jpg", width: 130, height: 82),
-              child: CachedNetworkImage(
-                imageUrl: model.url ?? "",
-                fit: BoxFit.fill,
-                placeholder: (context, url) => Image.asset("imgs/placeholder.png", width: 130, height: 82),
-                errorWidget: (context, url, _) => Image.asset("imgs/placeholder.png", width: 130, height: 82),
-                ),
+              child: HereImage(url: model.url ?? ""),
             ),
       );
   }

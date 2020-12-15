@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_study/finance/models/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_study/finance/util/image_util.dart';
+
 class RecommendListCell extends StatelessWidget {
 
   final ArticleModel model;
@@ -15,7 +17,7 @@ class RecommendListCell extends StatelessWidget {
     GestureDetector(
       onTap: onPressed,
       child:Container(
-        height: 82,
+        // height: 82,
         padding: EdgeInsets.fromLTRB(15, 7.5, 15, 7.5),
         child: Row(
           children: <Widget> [
@@ -26,26 +28,20 @@ class RecommendListCell extends StatelessWidget {
                 children: <Widget>[
                   Text(model.title ?? "", maxLines: 2, style: titleStyle,),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children:<Widget> [
                       Text(model.platformName ?? "", style: subTitleStyle),
-                      Text(model.releaseTime ?? "", style: subTitleStyle)
+                      SizedBox(width: 20),
+                      Text(model.formateTime(), style: subTitleStyle)
                     ]
                   )
                 ],
               )
             ,),
+            SizedBox(width: 8),
             ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-              // child: Image.asset("imgs/688.jpg", width: 130, height: 82),
-              child: CachedNetworkImage(
-                imageUrl: model.firstPic ?? "",
-                width: 130,
-                height: 82,
-                fit: BoxFit.fill,
-                placeholder: (context, url) => Image.asset("imgs/placeholder.png", width: 130, height: 82),
-                errorWidget: (context, url, _) => Image.asset("imgs/placeholder.png", width: 130, height: 82),
-                ),
+              borderRadius: BorderRadius.circular(4.0),
+              child: HereImage(url: model.firstPic ?? "", width: 130, height: 82,),
             )
           ]
         )
