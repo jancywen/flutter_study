@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_study/finance/pages/info/index.dart';
+import 'package:flutter_study/finance/pages/news/index.dart';
 
 class InfoTabBarView extends StatelessWidget {
 

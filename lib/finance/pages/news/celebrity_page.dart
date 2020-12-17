@@ -9,7 +9,16 @@ import 'package:flutter_study/finance/pages/webview/index.dart';
 import 'package:flutter_study/finance/util/h5_api_util.dart';
 
 
-class CelebrityPage extends StatelessWidget {
+class CelebrityPage extends StatefulWidget {
+  @override
+  _CelebrityPageState createState() => _CelebrityPageState();
+}
+
+class _CelebrityPageState extends State<CelebrityPage> with AutomaticKeepAliveClientMixin {
+
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(

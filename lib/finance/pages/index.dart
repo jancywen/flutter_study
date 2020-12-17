@@ -1,4 +1,4 @@
-export 'info/index.dart';
+export 'news/index.dart';
 
 export 'market/index.dart';
 

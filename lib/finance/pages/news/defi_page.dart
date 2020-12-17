@@ -9,7 +9,16 @@ import 'package:flutter_study/finance/pages/webview/index.dart';
 import 'package:flutter_study/finance/util/h5_api_util.dart';
 
 
-class DefiPage extends StatelessWidget {
+class DefiPage extends StatefulWidget {
+  @override
+  _DefiPageState createState() => _DefiPageState();
+}
+
+class _DefiPageState extends State<DefiPage> with AutomaticKeepAliveClientMixin {
+
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(

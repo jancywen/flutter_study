@@ -19,7 +19,16 @@ import 'package:flutter_study/finance/util/h5_api_util.dart';
 import 'package:flutter_study/finance/pages/my/index.dart';
 import 'package:flutter_study/finance/pages/login/index.dart';
 
-class RecommendPage extends StatelessWidget {
+class RecommendPage extends StatefulWidget {
+  @override
+  _RecommendPageState createState() => _RecommendPageState();
+}
+
+class _RecommendPageState extends State<RecommendPage> with AutomaticKeepAliveClientMixin {
+
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(

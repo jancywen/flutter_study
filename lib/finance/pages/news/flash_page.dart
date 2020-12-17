@@ -5,7 +5,17 @@ import 'package:flutter_study/finance/providers/info_flash_provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'cell/flash_list_cell.dart';
 
-class FlashPage extends StatelessWidget {
+
+class FlashPage extends StatefulWidget {
+  @override
+  _FlashPageState createState() => _FlashPageState();
+}
+
+class _FlashPageState extends State<FlashPage> with AutomaticKeepAliveClientMixin {
+
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(

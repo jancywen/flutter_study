@@ -224,7 +224,9 @@ class ApplyTabBarView extends StatelessWidget {
     var viewList = [PersonalApplyPage(), EnterpriseApplyPage(),];
     return TabBarView(
       children: viewList, 
-      controller: tabController,);
+      controller: tabController,
+      physics: NeverScrollableScrollPhysics(),
+      );
   }
 }
 
