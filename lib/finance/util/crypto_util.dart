@@ -4,7 +4,7 @@ import 'dart:convert';
 
 String getSign(Map parameters) {
   // 秘钥
-  var key = "secret=20e941c6-287c-11eb-a1d8-f875a467e283";
+  var key = "秘钥";
   // var parameters = data as Map<String, dynamic>;
 
   List<String> allKeys = [];
