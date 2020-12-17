@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_study/beginner/utils/translation.dart';
 
 class MyPage extends StatefulWidget {
   @override
@@ -28,7 +29,7 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
   Widget build(BuildContext context) {
     print("build my ");
     return Scaffold(
-      appBar: AppBar(title: Text("my")),
+      appBar: AppBar(title: Text(Translations.of(context).text("my"))),
       body: Container(
         child: Text("my")
       ),

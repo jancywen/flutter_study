@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_study/beginner/utils/translation.dart';
 
 
 class ShopPage extends StatefulWidget {
@@ -30,9 +31,24 @@ class _ShopPageState extends State<ShopPage> with AutomaticKeepAliveClientMixin 
     print("build shop");
     
     return Scaffold(
-      appBar: AppBar(title: Text("shop")),
+      appBar: AppBar(title: Text(Translations.of(context).text("shop"))),
       body: Container(
-        child:Text("shop")
+        child: Column(
+          children: [
+            FlatButton(
+              onPressed: (){
+                applic.onLocaleChanged(new Locale('en'));
+              }, 
+              child: Text("Englist")
+            ),
+            FlatButton(
+              onPressed: (){
+                applic.onLocaleChanged(new Locale('zh'));
+              }, 
+              child: Text("简体中文")
+            )
+          ],
+        )
       ),
     );
   }

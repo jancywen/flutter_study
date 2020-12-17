@@ -27,7 +27,7 @@ class _PrimaryMainPageState extends State<PrimaryMainPage> {
 
     // PageView 跳转到指定页面
     // _pageController.animateToPage(index, duration: Duration(seconds: 1), curve: ElasticInOutCurve());
-    // _pageController.jumpToPage(index);
+    _pageController.jumpToPage(index);
   }
 
 
@@ -67,9 +67,10 @@ class _PrimaryMainPageState extends State<PrimaryMainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: _bottomBar(),
-      body:_sotBodyPage()
+      // body:_sotBodyPage()
       // body: pages[_selectedIndex],
       // body: _indexStackBodyPage()
+      body: _pageViewBodyPage(),
     );
   }
 
@@ -88,7 +89,7 @@ class _PrimaryMainPageState extends State<PrimaryMainPage> {
         backgroundColor: Color.fromARGB(255, 27, 29, 36),
       );
   }
-// /*
+/*
 /// Stack + OffStage + TickerMode
   Widget _sotBodyPage() {
     return Stack(
@@ -110,7 +111,7 @@ class _PrimaryMainPageState extends State<PrimaryMainPage> {
         ),
     );
   }
-// */
+*/
 /*
 /// IndexedStack
   Widget _indexStackBodyPage() {
@@ -120,7 +121,7 @@ class _PrimaryMainPageState extends State<PrimaryMainPage> {
       );
   }
 */
-/*
+// /*
 /// pageview
   Widget _pageViewBodyPage() {
     return PageView(
@@ -129,7 +130,7 @@ class _PrimaryMainPageState extends State<PrimaryMainPage> {
       physics: NeverScrollableScrollPhysics(), //禁止滑动
     );
   }
-  */
+  // */
 ///
 ///
 

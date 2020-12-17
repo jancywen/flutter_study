@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_study/beginner/utils/translation.dart';
 
 class CategoryPage extends StatefulWidget {
   @override
@@ -27,7 +28,7 @@ class _CategoryPageState extends State<CategoryPage> with AutomaticKeepAliveClie
   Widget build(BuildContext context) {
     print("build category");
     return Scaffold(
-      appBar: AppBar(title: Text("Sort")),
+      appBar: AppBar(title: Text(Translations.of(context).text("category"))),
       body: Container(
         child: Text("sort")
       ),

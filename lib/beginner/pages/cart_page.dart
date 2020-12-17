@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_study/beginner/utils/translation.dart';
 
 class CartPage extends StatefulWidget {
   @override
@@ -27,7 +28,7 @@ class _CartPageState extends State<CartPage> with AutomaticKeepAliveClientMixin 
   Widget build(BuildContext context) {
     print("build cart");
     return Scaffold(
-      appBar: AppBar(title: Text("Cart")),
+      appBar: AppBar(title: Text(Translations.of(context).text("cart"))),
       body: Container(
         child: Text("cart")
       ),
