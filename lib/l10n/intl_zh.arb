@@ -1,0 +1,19 @@
+{
+    "title": "Flutter 工程",
+    "home": "GitHub 客户端",
+    "login": "登录",
+    "noDescription": "没有了",
+    "theme": "主题",
+    "language": "语言",
+    "logout": "退出",
+    "logoutTip": "确定退出？",
+    "cancel": "取消",
+    "yes": "确定",
+    "auto": "跟随系统",
+    "userName": "用户名",
+    "userNameOrEmail": "用户名、邮箱",
+    "userNameRequired": "不能为空",
+    "password": "密码",
+    "passwordRequired": "密码不能为空",
+    "userNameOrPasswordWrong": "用户名、密码错误"
+}

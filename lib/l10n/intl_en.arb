@@ -1,0 +1,19 @@
+{
+    "title": "Flutter App",
+    "home": "GitHub Client",
+    "login": "login",
+    "noDescription": "nothing",
+    "theme": "theme",
+    "language": "language",
+    "logout": "logout",
+    "logoutTip": "Are you sure?",
+    "cancel": "cancel",
+    "yes": "yes",
+    "auto": "auto",
+    "userName": "userName",
+    "userNameOrEmail": "userNameOrEmail",
+    "userNameRequired": "userNameRequired",
+    "password": "password",
+    "passwordRequired": "passwordRequired",
+    "userNameOrPasswordWrong": "userNameOrPasswordWrong"
+}
