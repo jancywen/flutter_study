@@ -49,6 +49,8 @@ dependencies:
   #loading
   flutter_easyloading: ^2.2.1
 
+  flukit: ^1.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

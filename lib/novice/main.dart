@@ -35,19 +35,16 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primaryColor: themeModel.theme
               ),
-            // onGenerateTitle: (context){
-            //   return S.of(context).title;
-            // },
             home: HomeRoute(),
             locale: localeModel.getLocale(),
             supportedLocales: S.delegate.supportedLocales,
             localizationsDelegates: [
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
-              // GMLocalizationsDelegate(),
+              GlobalCupertinoLocalizations.delegate,
               S.delegate,
             ],
-            localeResolutionCallback: 
+            localeResolutionCallback: // 监听到当前设备的最新语言
               (Locale _locale, Iterable<Locale> supportedLocales){
                 if (localeModel.getLocale() != null) {
                   return localeModel.getLocale();
