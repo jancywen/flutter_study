@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'api.dart';
 import 'result.dart';
 import 'system_toast.dart';
@@ -25,8 +26,8 @@ Future post(path, {dynamic data}) {
 
 Future request(url, {dynamic data, String method}) async {
   // var url = formatUrl(path);
-  print("url: $url");
-  print("参数：$data");
+  debugPrint("url: $url");
+  debugPrint("参数：$data");
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("TOKEN");
@@ -48,7 +49,7 @@ Future request(url, {dynamic data, String method}) async {
          })
     );
 
-    print(response.data);
+    debugPrint(response.data.toString());
 
     if (response.statusCode == 200 && response.data != null) {
 
@@ -64,11 +65,11 @@ Future request(url, {dynamic data, String method}) async {
         break;
       }      
     }else {
-      print("加载失败");
+      debugPrint("加载失败");
     }
 
   } on DioError catch (e) {
-    print("${e.error.toString()}");
+    debugPrint("${e.error.toString()}");
     SystemToast.show(e.error.toString());
   }
 }

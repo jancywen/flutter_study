@@ -11,7 +11,12 @@ class MyHome extends StatefulWidget {
   _MyHomeState createState() => _MyHomeState();
 }
 
-class _MyHomeState extends State<MyHome> {
+class _MyHomeState extends State<MyHome> with AutomaticKeepAliveClientMixin {
+
+  /// 保持状态
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
 
@@ -86,7 +91,7 @@ class _MyHomeState extends State<MyHome> {
 
   void _onPressedItem(UserProvider userProvider, MyHomeItemType item) {
     
-    print(item);
+    debugPrint(item.toString());
 
     switch (item) {
       case MyHomeItemType.enter:

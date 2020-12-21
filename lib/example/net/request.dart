@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_study/example/net/api.dart';
 import 'package:flutter_study/example/net/result.dart';
-
+import 'package:flutter/foundation.dart';
 import 'system_toast.dart';
 import 'result_obj.dart';
 import 'response_code.dart';
@@ -51,11 +51,11 @@ Future request(path, {dynamic data, String method}) async {
       }
       SystemToast.show(result.msg);
     }else {
-      print("加载失败");
+      debugPrint("加载失败");
     }
 
   } on DioError catch (e) {
-    print("${e.error.toString()}");
+    debugPrint("${e.error.toString()}");
     SystemToast.show(e.error.toString());
   }
 }

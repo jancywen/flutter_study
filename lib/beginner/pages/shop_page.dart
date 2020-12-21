@@ -16,19 +16,19 @@ class _ShopPageState extends State<ShopPage> with AutomaticKeepAliveClientMixin 
   void initState() {
     // TODO: implement initState
     super.initState();
-    print("init state shop ");
+    debugPrint("init state shop ");
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    print("dispose shop ");
+    debugPrint("dispose shop ");
   }
   @override
   Widget build(BuildContext context) {
 
-    print("build shop");
+    debugPrint("build shop");
     
     return Scaffold(
       appBar: AppBar(title: Text(Translations.of(context).text("shop"))),

@@ -7,7 +7,13 @@ class CommunityHome extends StatefulWidget {
   _CommunityHomeState createState() => _CommunityHomeState();
 }
 
-class _CommunityHomeState extends State<CommunityHome> {
+class _CommunityHomeState extends State<CommunityHome> with  AutomaticKeepAliveClientMixin {
+
+  /// 保持状态
+  @override
+  bool get wantKeepAlive => true;
+
+  
   @override
   Widget build(BuildContext context) {
 

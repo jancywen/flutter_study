@@ -14,6 +14,7 @@ class _FinanceHomePageState extends State<FinanceHomePage> {
 
   List<Widget> pages;
   List<BottomNavigationBarItem> itemList;
+  PageController _pageController;
 
   final defaultItemColor = Color.fromARGB(255, 125, 125, 125);
 
@@ -54,12 +55,15 @@ class _FinanceHomePageState extends State<FinanceHomePage> {
           label: item.name)
         ).toList();
     }
+    
+    _pageController = PageController();
   }
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+    _pageController.jumpToPage(index);
   }
 
   Widget _getPagesWidget(int index) {
@@ -76,7 +80,13 @@ class _FinanceHomePageState extends State<FinanceHomePage> {
     ScreenUtil.init(context, designSize: Size(750, 1334), allowFontScaling: false);
 
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: _appBar(),
+      body: _buildBody(),
+    );
+  }
+
+  Widget _appBar() {
+    return BottomNavigationBar(
         items: itemList,
         currentIndex: _selectedIndex,
         iconSize: 20,
@@ -88,21 +98,18 @@ class _FinanceHomePageState extends State<FinanceHomePage> {
         fixedColor: Color.fromARGB(255, 249, 244, 247),
         type: BottomNavigationBarType.fixed,
         backgroundColor: Color.fromARGB(255, 27, 29, 36),
-      ),
-      body: new Stack(
-        children:[
-          _getPagesWidget(0),
-          _getPagesWidget(1),
-          _getPagesWidget(2),
-          _getPagesWidget(3),
-          _getPagesWidget(4),
-        ]
-      ),
+      );
+  }
+
+  Widget _buildBody() {
+    return PageView(
+      controller: _pageController,
+      children: pages,
+      physics: NeverScrollableScrollPhysics(),
     );
   }
+
 }
-
-
 
 class _Item {
   String name, activeIcon, normalIcon;

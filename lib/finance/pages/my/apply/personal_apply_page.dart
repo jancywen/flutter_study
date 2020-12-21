@@ -69,7 +69,7 @@ class _PersonalApplyPageState extends State<PersonalApplyPage> {
             }
           });
         } catch (e) {
-          print(e.toString());
+          debugPrint(e.toString());
         }
     });
 
@@ -243,7 +243,7 @@ class _PersonalApplyPageState extends State<PersonalApplyPage> {
             GestureDetector(
               child: Text("《平台入驻服务条款》",style: tipStyle,),
               onTap: (){
-                print("查看入驻协议");
+                debugPrint("查看入驻协议");
               },
               )
           ],),),
@@ -253,7 +253,7 @@ class _PersonalApplyPageState extends State<PersonalApplyPage> {
             height: 46,
             minWidth: ScreenUtil().screenWidth ,
             onPressed: (){
-              print("tijiao");
+              debugPrint("tijiao");
             }, 
             child: Text("提交申请")
             ),

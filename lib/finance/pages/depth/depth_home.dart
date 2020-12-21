@@ -13,7 +13,13 @@ class DepthHome extends StatefulWidget {
   _DepthHomeState createState() => _DepthHomeState();
 }
 
-class _DepthHomeState extends State<DepthHome> {
+class _DepthHomeState extends State<DepthHome> with AutomaticKeepAliveClientMixin {
+
+  /// 保持状态
+  @override
+  bool get wantKeepAlive => true;
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

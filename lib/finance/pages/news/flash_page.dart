@@ -32,7 +32,7 @@ class _FlashPageState extends State<FlashPage> with AutomaticKeepAliveClientMixi
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (_, index){
-                    return FlashListCell(model: fp.dataList[index], onPressed:(){print("pressed");});
+                    return FlashListCell(model: fp.dataList[index], onPressed:(){debugPrint("pressed");});
                   },
                 childCount: fp.dataList.length,
               ))

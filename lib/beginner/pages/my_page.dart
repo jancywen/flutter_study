@@ -15,19 +15,19 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print("init state my ");
+    debugPrint("init state my ");
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    print("dispose my ");
+    debugPrint("dispose my ");
   }
 
   @override
   Widget build(BuildContext context) {
-    print("build my ");
+    debugPrint("build my ");
     return Scaffold(
       appBar: AppBar(title: Text(Translations.of(context).text("my"))),
       body: Container(

@@ -157,7 +157,7 @@ class ExampleProvider1 with ChangeNotifier {
     await exampleHomeQuery().then((model) {
       return model as ExampleHomeModel;
     }).then((model) {
-      print("model.banners.length:${ model.banners.length}");
+      debugPrint("model.banners.length:${ model.banners.length}");
       _bannerList = model.banners ?? [];
       _brandList = model.brands ?? [];
       _productList = model.products ?? [];
@@ -194,8 +194,8 @@ class ExampleProvider2 with ChangeNotifier {
 
 
   ExampleProvider2(this.someParam) {
-    print("ExampleProvider2 初始化");
-    print(someParam);
+    debugPrint("ExampleProvider2 初始化");
+    debugPrint(someParam);
     _refreshController = RefreshController(initialRefresh: false);
     _onRefresh();
   }
@@ -204,7 +204,7 @@ class ExampleProvider2 with ChangeNotifier {
   void dispose() {
     // TODO: implement dispose
     _refreshController.dispose();
-    print("dispose");
+    debugPrint("dispose");
     super.dispose();
   }
 
@@ -218,8 +218,8 @@ class ExampleProvider2 with ChangeNotifier {
           "iterable",
           "iterable"
           ];
-        //   print(_list);
-        // print(_list.length);
+        //   debugPrint(_list);
+        // debugPrint(_list.length);
         _refreshController.refreshCompleted();
         _refreshController.loadComplete();
         notifyListeners();
@@ -236,8 +236,8 @@ class ExampleProvider2 with ChangeNotifier {
           "iterable",
           "iterable"
           ]);
-        // print(_list);
-        // print(_list.length);
+        // debugPrint(_list);
+        // debugPrint(_list.length);
         if (_list.length == 30) {
           _refreshController.loadNoData();
         }else {

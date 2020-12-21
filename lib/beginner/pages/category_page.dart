@@ -15,18 +15,18 @@ class _CategoryPageState extends State<CategoryPage> with AutomaticKeepAliveClie
   void initState() {
     // TODO: implement initState
     super.initState();
-    print("init state category ");
+    debugPrint("init state category ");
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    print("dispose category ");
+    debugPrint("dispose category ");
   }
   @override
   Widget build(BuildContext context) {
-    print("build category");
+    debugPrint("build category");
     return Scaffold(
       appBar: AppBar(title: Text(Translations.of(context).text("category"))),
       body: Container(

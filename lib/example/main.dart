@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
 
   Route<dynamic> _onGenerateRoute(RouteSettings settings) {
     String routeName = settings.name;
-    print("routeName: $routeName");
+    debugPrint("routeName: $routeName");
     if (_routeList.containsKey(routeName)) {
       var f = _routeList[routeName];
       return MaterialPageRoute(builder: f);
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
 
   Route<dynamic> _onUnknownRoute(RouteSettings settings) {
     String name = settings.name;
-    print("未匹配到路由：$name");
+    debugPrint("未匹配到路由：$name");
     return MaterialPageRoute(builder: _routeList["/error_page"]);
   }
   @override

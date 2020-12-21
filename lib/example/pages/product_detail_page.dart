@@ -27,7 +27,7 @@ class _ProductDetailState extends State<ProductDetail>
 
   //取出路由参数 
   String msg = ModalRoute.of(context).settings.arguments as String;
-  print(msg);
+  debugPrint(msg);
 
     return Scaffold(
       body:CustomScrollView(
@@ -39,7 +39,7 @@ class _ProductDetailState extends State<ProductDetail>
               new IconButton(
                 icon: Icon(Icons.add),
                 onPressed: () {
-                  print("添加");
+                  debugPrint("添加");
                 },
               ),
               new PopupMenuButton<String>(

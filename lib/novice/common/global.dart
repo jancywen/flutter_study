@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/index.dart';
 import 'dart:convert';
 import 'cache_object.dart';
+import 'git.dart';
 
 // 提供五套可选主题色
 const _themes = <MaterialColor>[
@@ -34,7 +35,7 @@ class Global {
       try {
         profile = Profile.fromJson(jsonDecode(_profile));
       } catch (e) {
-        print(e);
+        debugPrint(e);
       }
     }
 
@@ -45,7 +46,7 @@ class Global {
       ..maxCount = 100;
 
     //初始化网络请求相关配置
-    // Git.init();
+    Git.init();
   }
 
   // 持久化Profile信息

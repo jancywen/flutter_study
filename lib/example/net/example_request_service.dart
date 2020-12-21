@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'example_request.dart';
 import 'package:flutter_study/example/models/index.dart';
 import 'dart:convert';
@@ -13,7 +15,7 @@ Future exampleQuery(data) {
 
 Future exampleHomeQuery() {
   return rootBundle.loadString('data/example_home.json').then((value) {
-    print(value);
+    debugPrint(value);
     ExampleHomeModel model = ExampleHomeModel.fromJson(json.decode(value.toString()));
     return model;
   });

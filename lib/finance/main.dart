@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/providers.dart';
 import 'route.dart';
+import 'package:flutter/foundation.dart';
 
 void main() {
+  // 将debugPrint指定为同步打印数据 
+  debugPrint = (String message, {int wrapWidth}) => debugPrintSynchronously(message, wrapWidth: wrapWidth);
+  // 将debugPrint指定为空的执行体, 所以它什么也不做 
+  // debugPrint = (String message, {int wrapWidth}) {};
   runApp(MyApp());
 }
 
@@ -12,7 +17,7 @@ class MyApp extends StatelessWidget {
 
   Route<dynamic> _onGenerateRoute(RouteSettings settings) {
     String routeName = settings.name;
-    print("routeName: $routeName");
+    debugPrint("routeName: $routeName");
     if (routeList.containsKey(routeName)) {
       var f = routeList[routeName];
       return MaterialPageRoute(builder: f);
@@ -22,7 +27,7 @@ class MyApp extends StatelessWidget {
 
   Route<dynamic> _onUnknownRoute(RouteSettings settings) {
     String name = settings.name;
-    print("未匹配到路由：$name");
+    debugPrint("未匹配到路由：$name");
     return MaterialPageRoute(builder: routeList["/error_page"]);
   }
   @override

@@ -14,7 +14,11 @@ class InfoHome extends StatefulWidget {
 
 TabController _tabController;
 
-class _InfoHomeState extends State<InfoHome> with SingleTickerProviderStateMixin {
+class _InfoHomeState extends State<InfoHome> with SingleTickerProviderStateMixin , AutomaticKeepAliveClientMixin {
+
+  /// 保持状态
+  @override
+  bool get wantKeepAlive => true;
 
 
   var _tabBar;

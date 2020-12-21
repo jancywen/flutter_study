@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 
 /*
  * response.data
@@ -19,7 +20,7 @@ Future exsmpleGet() async {
 
 Future exampleRequest() async {
   return rootBundle.loadString('data/example.json').then((value) {
-    print(value);
+    debugPrint(value);
     return value;
   });
 }

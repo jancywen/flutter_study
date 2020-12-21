@@ -1,5 +1,7 @@
 
-// const String BASE_URL = "http://47.112.254.78:8090";
+import 'package:flutter/foundation.dart';
+
+const String DEV_BASE_URL = "http://47.112.254.78:8090";
 const String BASE_URL = "https://www.here.club";
 
 
@@ -37,5 +39,13 @@ class API {
 }
 
 String formatUrl(String path) {
-  return BASE_URL + path;
+  // 断言
+  var baseUrl = BASE_URL;
+  assert((){
+    baseUrl = DEV_BASE_URL;
+    return true;
+    }());
+  return baseUrl + path;
+  // 编译常数
+  // return kReleaseMode ? BASE_URL + path : DEV_BASE_URL +path;
 }

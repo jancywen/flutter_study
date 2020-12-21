@@ -63,7 +63,7 @@ class _RecommendPageState extends State<RecommendPage> with AutomaticKeepAliveCl
                     },
                     itemCount: sp.bannerList.length, 
                     onTap: (index){
-                      print(sp.bannerList[index]);
+                      debugPrint(sp.bannerList[index].link);
                     },
                     pagination: new SwiperPagination(),
                     ), 

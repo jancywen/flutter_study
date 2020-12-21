@@ -19,13 +19,18 @@ List<String> coinList = ["BTC", "ETH", "XRP", "BCH", "LINK", "LTC", "ADA", "EOS"
 
 
 class MarketHome extends StatefulWidget {
-    final channel = IOWebSocketChannel.connect(marketWws);
+
+  final channel = IOWebSocketChannel.connect(marketWws);
 
   @override
   _MarketHomeState createState() => _MarketHomeState();
 }
 
-class _MarketHomeState extends State<MarketHome> {
+class _MarketHomeState extends State<MarketHome> with WidgetsBindingObserver, AutomaticKeepAliveClientMixin {
+
+  /// 保持状态
+  @override
+  bool get wantKeepAlive => true;
 
   var _rate = 6.75;
 
@@ -34,17 +39,27 @@ class _MarketHomeState extends State<MarketHome> {
   @override
   void initState() {
     super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
+    // 注册监听器
+    WidgetsBinding.instance.addObserver(this);
+    debugPrint("注册监听器");
     subTicker();
   }
 
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    if (state == AppLifecycleState.resumed) {
+      // 前台
+      subTicker();
+    }else if (state == AppLifecycleState.paused) {
+      // 后台
+      unsubTicker();
+    }
+  }
+
   void subTicker() {
-    print("sub");
+    debugPrint("sub");
     // widget.channel.sink.add("data");
     var sub = {"cmd":"sub","args":["ticker"]};
     String jsonString = jsonEncode(sub);
@@ -52,7 +67,7 @@ class _MarketHomeState extends State<MarketHome> {
   }
 
   void unsubTicker() {
-    print("unsub");
+    debugPrint("unsub");
     var unsub = {"cmd":"unsub","args":["ticker"]};
     String jsonString = jsonEncode(unsub);
     widget.channel.sink.add(jsonString);
@@ -82,8 +97,6 @@ class _MarketHomeState extends State<MarketHome> {
       children: [
         TitleBar(),
         SizedBox(height: 15),
-        // FlatButton(onPressed: subTicker, child: Text("订阅", style: TextStyle(color: Colors.white),)),
-        // FlatButton(onPressed: unsubTicker, child: Text("取消订阅", style: TextStyle(color: Colors.white),)),
         Expanded(
           child: StreamBuilder(
             stream: widget.channel.stream,
@@ -108,25 +121,22 @@ class _MarketHomeState extends State<MarketHome> {
   }
   
   @override
-  void deactivate() {
-    // TODO: implement deactivate
-    super.deactivate();
-    unsubTicker();
-  }
-  @override
   void dispose() {
     // 
     widget.channel.sink.close();
     super.dispose();
+    // 移除监听器
+    WidgetsBinding.instance.removeObserver(this);
+    debugPrint("移除监听器");
   }
 
 //解压
   _gunZip(List<int> data) {
-    // print("gunzip");
+    // debugPrint("gunzip");
     List<int> bytes = GZipDecoder().decodeBytes(data);
     String json = String.fromCharCodes(bytes);
     MarketData md = MarketData.fromJson(jsonDecode(json));
-    // print(md.data.where((element) => element.quoteAsset == "USDT").length);
+    // debugPrint(md.data.where((element) => element.quoteAsset == "USDT").length);
     return md.data.where((element) => symbolList.contains(element.symbol) ?? false).toList();
   }
 }

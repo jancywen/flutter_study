@@ -95,7 +95,7 @@ class _WebViewPage extends State<WebViewPage> {
             },
             navigationDelegate: (NavigationRequest request){
               if (request.url.startsWith("myapp://")) {
-                print("即将打开： ${request.url}");
+                debugPrint("即将打开： ${request.url}");
                 return NavigationDecision.prevent;
               }
               return NavigationDecision.navigate;

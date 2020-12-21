@@ -179,7 +179,7 @@ class _RegisterPageState extends State<RegisterPage> {
         startCountdownTimer();
       }
     }, onError: (e){
-      print("error");
+      debugPrint("error");
     });
 
 
