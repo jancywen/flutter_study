@@ -95,8 +95,7 @@ class SettingItemWidget extends StatelessWidget {
       child: item == MyHomeItemType.enter ? 
       Container(
         height: 64,
-        child: Expanded(child: Image.asset(icon, fit: BoxFit.fill)),
-
+        child: Image.asset(icon, fit: BoxFit.fill),
       )
       :
      Container(

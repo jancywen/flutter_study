@@ -1,4 +1,5 @@
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_study/finance/models/index.dart';
@@ -20,7 +21,7 @@ class UserProvider extends ChangeNotifier {
   Function get saveToken => _saveToken;
   Function get getUserInfo => _getUserInfo;
   Function get getSettledStatus => _getSettledStatus;
-
+  Function get clearData => _clearData;
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   
   UserProvider(){
@@ -41,9 +42,9 @@ class UserProvider extends ChangeNotifier {
   }
   // 保存token 
   void _saveToken(String token) async {
+    _token = token;
     SharedPreferences prefs = await _prefs;
     prefs.setString("TOKEN", token);
-    _token = token;
   }
   // 读取用户信息
   void _readUserInfo() async {
@@ -65,6 +66,18 @@ class UserProvider extends ChangeNotifier {
   void _saveSettledStatus(int status) async {
     SharedPreferences prefs = await _prefs;
     prefs.setInt("SETTLED_STATUS", status);
+  }
+
+  // 退出
+  void _clearData() async {
+    _token = null;
+    _user = null;
+    _settledStatus = null;
+    SharedPreferences prefs = await _prefs;
+    prefs.remove("TOKEN");
+    prefs.remove("USER_INFO");
+    prefs.remove("SETTLED_STATUS");
+    notifyListeners();
   }
 
   // 用户信息

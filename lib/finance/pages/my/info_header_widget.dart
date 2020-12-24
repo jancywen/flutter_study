@@ -25,7 +25,7 @@ class InfoHeaderWidget extends StatelessWidget {
                     ? Image.asset("imgs/avatar.png") 
                     : ClipRRect(
                       borderRadius: BorderRadius.circular(26),
-                      child: Expanded(child: HereImage(url: user.avatar ?? "", placeholder: "imgs/avatar.png",height:52, width: 52,))
+                      child: HereImage(url: user.avatar ?? "", placeholder: "imgs/avatar.png",height:52, width: 52,)
                     )
                     ),
                   Expanded(
@@ -38,8 +38,8 @@ class InfoHeaderWidget extends StatelessWidget {
                           Text("登录后享受更多功能")
                         ] : 
                         [
-                          Text("${user.nickname}", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),),
-                          Text("${user.mobile}")
+                          Text(user.nickname ?? "", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),),
+                          Text(user.mobile ?? "")
                       ],
                     )
                   ),

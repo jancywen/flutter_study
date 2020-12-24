@@ -83,14 +83,14 @@ class _LoginPageState extends State<LoginPage> {
           child: Container(
             height: 54,
             width: ScreenUtil().screenWidth - 60,
-            child: Expanded(child: TextField(
+            child: TextField(
               style: TextStyle(fontSize: 16, color: Color(0xffffffff)),
               controller: _phoneController,
               decoration: InputDecoration(
                 hintText: '请输入手机号', 
                 hintStyle: TextStyle(fontSize: 16, color: Color(0xff727373))),
 
-            )),
+            ),
             ),
           ),
 
@@ -114,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
               minWidth: 60,
               onPressed: countDownAction, 
               child: Text(
-                 _countdownTime > 0 ? '$_countdownTime s后重新获取' : '获取验证码', 
+                 _countdownTime > 0 ? '$_countdownTime S' : '获取验证码', 
                  style: TextStyle(
                    color: Colors.white60 ),))
 
@@ -184,10 +184,12 @@ void loginAction(BuildContext context) {
   loginQuery({'countryCode': 86, 'mobile': _phoneController.text, 'smsCode': _codeController.text})
   .then((value) {
     if (value["token"] != null) {
+      Navigator.pop(context);
+
       provider.saveToken(value["token"]);
       provider.getUserInfo();
       provider.getSettledStatus();
-      Navigator.pop(context);
+      
     }
 
   });

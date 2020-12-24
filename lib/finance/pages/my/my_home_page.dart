@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_study/finance/models/index.dart';
@@ -63,13 +64,13 @@ class _MyHomeState extends State<MyHome> with AutomaticKeepAliveClientMixin {
             )
           ];
         },
-        body: ListView(children: _getWidgetList(userProvider),)
+        body: ListView(children: _getWidgetList(userProvider, context),)
       );
       },)
     );
   }
 
-  List<Widget> _getWidgetList(UserProvider userProvider) {
+  List<Widget> _getWidgetList(UserProvider userProvider, BuildContext context) {
     var list = [
       [
         MyHomeItemType.notification,
@@ -79,17 +80,20 @@ class _MyHomeState extends State<MyHome> with AutomaticKeepAliveClientMixin {
       [
         MyHomeItemType.about, 
         MyHomeItemType.secert,
-      ],
-      [
-        MyHomeItemType.logout
       ]
     ];
-  list.insert(0, userProvider.settledStatus == 3 ? [MyHomeItemType.manage] : [MyHomeItemType.enter]);
-    
-  return list.map<Widget>((e) => SettingSectionWidget(settingList: e, onPressedItem:(item) => _onPressedItem(userProvider, item),)).toList();
+    list.insert(0, userProvider.settledStatus == 3 ? [MyHomeItemType.manage] : [MyHomeItemType.enter]);
+    if (userProvider.user != null) {
+      list.add([MyHomeItemType.logout]);
+    }
+  return list.map<Widget>(
+    (e) => SettingSectionWidget(
+      settingList: e, 
+      onPressedItem:(item) => 
+        _onPressedItem(context,userProvider, item),)).toList();
   }
 
-  void _onPressedItem(UserProvider userProvider, MyHomeItemType item) {
+  void _onPressedItem(BuildContext context, UserProvider userProvider, MyHomeItemType item) {
     
     debugPrint(item.toString());
 
@@ -124,7 +128,27 @@ class _MyHomeState extends State<MyHome> with AutomaticKeepAliveClientMixin {
 
         break;
       case MyHomeItemType.logout:
-
+        showDialog(context: context, builder: (BuildContext context){
+          return CupertinoAlertDialog(
+            title:Text("提示"),
+            content: Text("确定退出吗？"),
+            actions: [
+              CupertinoDialogAction(
+                child: Text("取消"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                ),
+              CupertinoDialogAction(
+                child: Text("确定"),
+                onPressed: () { 
+                  Navigator.of(context).pop();
+                  userProvider.clearData();
+                },
+                ),
+              ],
+          );
+        });
         break;
       default:
         break;

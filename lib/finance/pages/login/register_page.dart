@@ -72,14 +72,13 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Container(
             height: 54,
             width: ScreenUtil().screenWidth - 60,
-            child: Expanded(child: TextField(
+            child:  TextField(
               style: TextStyle(fontSize: 16, color: Color(0xffffffff)),
               controller: _phoneController,
               decoration: InputDecoration(
                 hintText: '请输入手机号', 
                 hintStyle: TextStyle(fontSize: 16, color: Color(0xff727373))),
-
-            )),
+            ),
             ),
           ),
 
@@ -103,7 +102,7 @@ class _RegisterPageState extends State<RegisterPage> {
               minWidth: 60,
               onPressed: countDownAction, 
               child: Text(
-                 _countdownTime > 0 ? '$_countdownTime s后重新获取' : '获取验证码', 
+                 _countdownTime > 0 ? '$_countdownTime S' : '获取验证码', 
                  style: TextStyle(
                    color: Colors.white60 ),))
 
@@ -118,14 +117,13 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Container(
             height: 54,
             width: ScreenUtil().screenWidth - 60,
-            child: Expanded(child: TextField(
+            child: TextField(
               style: TextStyle(fontSize: 16, color: Color(0xffffffff)),
               controller: _pwdController,
               decoration: InputDecoration(
                 hintText: '请输入密码', 
                 hintStyle: TextStyle(fontSize: 16, color: Color(0xff727373))),
-
-            )),
+            ),
             ),
           ),
 
@@ -135,14 +133,13 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Container(
             height: 54,
             width: ScreenUtil().screenWidth - 60,
-            child: Expanded(child: TextField(
+            child: TextField(
               style: TextStyle(fontSize: 16, color: Color(0xffffffff)),
               controller: _confirmPwdController,
               decoration: InputDecoration(
                 hintText: '再次输入密码', 
                 hintStyle: TextStyle(fontSize: 16, color: Color(0xff727373))),
-
-            )),
+              ),
             ),
           ),
 
