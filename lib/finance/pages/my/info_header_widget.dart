@@ -46,6 +46,7 @@ class InfoHeaderWidget extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(right:15),
                     child: Image.asset("imgs/indicator.png",width: 8, height: 13),)
+                    ,UnconstrainedBox()
                 ],
               ),
             )
